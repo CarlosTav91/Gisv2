@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Curso ArcGIS Pro · 40 horas · Ingenio Consultoría</title>
+<meta name="description" content="Curso virtual de ArcGIS Pro de 40 horas: del nivel básico al avanzado. Geodatabase, geoprocesamiento, teledetección, terreno, LiDAR, campo y Python con datos reales de Colombia. Inicia el 17 de noviembre.">
+<meta property="og:title" content="Curso ArcGIS Pro · 40 horas">
+<meta property="og:description" content="De los fundamentos al análisis avanzado y la automatización. Virtual, martes, jueves y viernes de 7:00 a 10:00 p. m. Inicia el 17 de noviembre.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A1E4A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1E4A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%233466CC' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23F5E32A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1E4A; --navy-2:#11295F; --line:#23407E; --blue:#3466CC; --sky:#7FA3EA;
+  --yellow:#F5E32A; --paper:#F3F5FA; --white:#FFFFFF;
+  --ink:#0E1A33; --muted:#53607D; --on-dark:#C9D3EA; --rule:#D9DFEC;
+  --lvl1:#7FA3EA; --lvl2:#3466CC; --lvl3:#0A1E4A;
+  --display:'Sora','Segoe UI',system-ui,sans-serif;
+  --text:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --wrap:1120px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--text)}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--yellow);color:var(--navy);padding:8px 14px;border-radius:6px;z-index:100;font-weight:600}
+.skip:focus{left:12px}
+
+/* ---------- Header ---------- */
+.top{position:sticky;top:0;z-index:50;background:rgba(10,30,74,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.brand{display:block;width:132px;flex-shrink:0}
+.brand svg{display:block;width:100%;height:auto}
+.nav{display:flex;align-items:center;gap:28px;font-size:15px;color:var(--on-dark)}
+.nav a{text-decoration:none}
+.nav a:hover{color:var(--white)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 16px/1 var(--text);text-decoration:none;border-radius:999px;padding:15px 24px;transition:background .15s,color .15s,border-color .15s}
+.btn-primary{background:var(--yellow);color:var(--navy)}
+.btn-primary:hover{background:#FFF06B}
+.btn-ghost{border:1.5px solid var(--line);color:var(--white)}
+.btn-ghost:hover{border-color:var(--sky)}
+.btn-sm{padding:11px 18px;font-size:15px}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:var(--navy);color:var(--white);overflow:hidden}
+.hero-map{position:absolute;inset:0;pointer-events:none}
+.hero-map svg{position:absolute;right:-180px;top:50%;transform:translateY(-50%);width:980px;height:auto}
+.c-minor{fill:none;stroke:#1C3670;stroke-width:1.1}
+.c-major{fill:none;stroke:var(--blue);stroke-width:1.7}
+.hero-map text{font:500 13px var(--mono);fill:var(--yellow)}
+.hero .wrap{position:relative;padding-top:88px;padding-bottom:64px}
+.kicker{font:600 20px/1.3 var(--display);color:var(--yellow);margin-bottom:18px}
+.hero h1{font-weight:800;font-size:clamp(76px,13vw,148px);line-height:.9;letter-spacing:-.035em}
+.lead{font:600 clamp(24px,3vw,32px)/1.2 var(--display);margin-top:26px;max-width:560px}
+.hero .desc{margin-top:18px;font-size:18px;color:var(--on-dark);max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);margin-top:72px}
+.fact{padding:22px 0 22px 24px;border-left:1.5px solid var(--line)}
+.fact:first-child{padding-left:0;border-left:0}
+.fact b{display:block;font:800 54px/1 var(--display);color:var(--white)}
+.fact:first-child b{color:var(--yellow)}
+.fact span{font-size:15px;color:var(--on-dark)}
+
+.logistics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:26px 0 0;font-size:15px;color:var(--on-dark)}
+.logistics dt{color:var(--sky);font-size:14px}
+.logistics dd{margin:2px 0 0;color:var(--white);font-weight:500;font-size:16px;line-height:1.4}
+
+/* ---------- Generic sections ---------- */
+section.block{padding:96px 0}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px;margin-bottom:44px;align-items:baseline}
+.sec-num{font:500 14px var(--mono);color:var(--blue)}
+.sec-head h2{font-size:clamp(32px,4.4vw,46px);font-weight:700;letter-spacing:-.02em;max-width:720px}
+.sec-head p{grid-column:2;color:var(--muted);max-width:640px;margin-top:12px;font-size:18px}
+.indent{margin-left:232px}
+
+/* Objective */
+.objective{background:var(--white);border:1px solid var(--rule);border-left:5px solid var(--yellow);border-radius:4px 10px 10px 4px;padding:30px 34px;font:600 clamp(20px,2.4vw,25px)/1.4 var(--display);color:var(--navy)}
+.objective small{display:block;font:500 14px var(--text);color:var(--muted);margin-bottom:10px}
+
+/* Outcomes */
+.outcomes{counter-reset:o;display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px;border-top:1px solid var(--rule)}
+.outcomes li{counter-increment:o;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.outcomes li::before{content:counter(o);font:700 26px/1.1 var(--display);color:var(--blue)}
+
+/* Method + audience */
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:28px}
+.panel{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:34px}
+.panel h3{font-size:24px;font-weight:700;margin-bottom:22px}
+.method{display:grid;gap:20px}
+.method dt{font-weight:600;color:var(--navy)}
+.method dd{margin:2px 0 0;color:var(--muted)}
+.panel.dark{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.panel.dark p{color:var(--on-dark)}
+.panel.dark h4{font:600 17px var(--display);color:var(--yellow);margin:28px 0 12px}
+.checks li{position:relative;padding-left:30px;margin-top:10px}
+.checks li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border:1.6px solid var(--yellow);border-radius:4px;background:no-repeat center/10px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5 L4.5 8.5 L11 1' fill='none' stroke='%23F5E32A' stroke-width='2'/%3E%3C/svg%3E")}
+
+/* ---------- Route bar ---------- */
+.route{background:var(--white);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.bar{display:flex;height:64px;border-radius:8px;overflow:hidden}
+.bar a{display:flex;align-items:center;justify-content:space-between;padding:0 22px;text-decoration:none;color:var(--white);font:700 18px var(--display);transition:filter .15s}
+.bar a:hover{filter:brightness(1.12)}
+.bar a span{font:500 15px var(--mono);opacity:.85}
+.bar .l1{flex:15;background:var(--lvl1);color:var(--navy)}
+.bar .l2{flex:12;background:var(--lvl2)}
+.bar .l3{flex:13;background:var(--lvl3)}
+.bar-legend{display:flex;margin-top:12px;font-size:15px;color:var(--muted)}
+.bar-legend div{padding-right:16px}
+.bar-legend div:nth-child(1){flex:15}.bar-legend div:nth-child(2){flex:12}.bar-legend div:nth-child(3){flex:13}
+
+/* ---------- Levels ---------- */
+.level{padding:88px 0 0}
+#avanzado{padding-bottom:96px}
+.level-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:18px;margin-bottom:28px;border-bottom:3px solid var(--lc)}
+.level-head h2{font-size:clamp(30px,4vw,42px);font-weight:700;letter-spacing:-.02em}
+.level-head h2 small{display:block;font:500 15px var(--text);color:var(--muted);letter-spacing:0;margin-bottom:6px}
+.level-head .meta{font:500 15px var(--mono);color:var(--muted);white-space:nowrap}
+.part{display:flex;justify-content:space-between;align-items:baseline;font:600 18px var(--display);color:var(--navy);margin:40px 0 18px}
+.part:first-of-type{margin-top:0}
+.part span{font:500 15px var(--mono);color:var(--muted)}
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.unit{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:24px 24px 26px;display:flex;flex-direction:column}
+.unit-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.unit-n{font:800 30px/1 var(--display);color:var(--lc)}
+.unit-h{font:500 14px var(--mono);color:var(--muted);background:var(--paper);padding:4px 9px;border-radius:999px}
+.unit h3{font-size:19px;font-weight:700;line-height:1.25;margin-bottom:14px;color:var(--navy)}
+.unit li{position:relative;padding-left:16px;font-size:15.5px;color:#36425E;margin-top:7px;line-height:1.45}
+.unit li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--lc)}
+.unit.note{background:var(--navy);border-color:var(--navy);color:var(--white);justify-content:center}
+.unit.note h3{color:var(--yellow);font-size:17px}
+.unit.note p{color:var(--on-dark);font-size:15.5px}
+.unit.note p strong{color:var(--white);font-weight:500}
+.lv1{--lc:var(--lvl1)} .lv1 .unit-n{color:var(--blue)}
+.lv2{--lc:var(--lvl2)}
+.lv3{--lc:var(--lvl3)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:28px;border-top:1px solid var(--rule)}
+.pillars div{padding:20px 24px 0 0}
+.pillars dt{font:700 17px var(--display);color:var(--navy)}
+.pillars dd{margin:4px 0 0;color:var(--muted);font-size:15.5px}
+
+/* ---------- Project ---------- */
+.project{background:var(--navy);color:var(--white);position:relative;overflow:hidden}
+.project .sec-num{color:var(--sky)}
+.project .sec-head p{color:var(--on-dark)}
+.deliverables{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.deliverables li{border:1.5px solid var(--line);border-radius:10px;padding:24px 22px;font:600 18px/1.35 var(--display);position:relative}
+.deliverables li::before{content:"";display:block;width:22px;height:22px;margin-bottom:18px;border:1.8px solid var(--yellow);border-radius:5px;background:no-repeat center/13px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5 L4.5 8.5 L11 1' fill='none' stroke='%23F5E32A' stroke-width='2'/%3E%3C/svg%3E")}
+.tools-eval{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.tools-eval h3{font-size:22px;font-weight:700;margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips li{border:1px solid var(--line);background:var(--navy-2);border-radius:999px;padding:8px 16px;font-size:15px;color:var(--on-dark)}
+.eval li{margin-bottom:18px}
+.eval .row{display:flex;justify-content:space-between;font-size:16px;margin-bottom:8px}
+.eval .row strong{font:700 18px var(--display);color:var(--yellow)}
+.eval .track{height:8px;border-radius:99px;background:var(--navy-2);overflow:hidden}
+.eval .track i{display:block;height:100%;background:var(--sky);border-radius:99px}
+.cert{margin-top:24px;font-size:15px;color:var(--on-dark)}
+.cert strong{color:var(--white)}
+
+/* ---------- Teacher ---------- */
+.teacher{display:grid;grid-template-columns:200px 1fr;gap:32px}
+.teacher .sec-num{padding-top:10px}
+.teacher h2{font-size:clamp(34px,4.6vw,48px);font-weight:700;letter-spacing:-.02em}
+.teacher .role{font:600 19px/1.4 var(--display);color:var(--blue);margin-top:12px;max-width:720px}
+.teacher .bio{margin-top:18px;color:#36425E;max-width:720px;font-size:18px}
+.teacher .areas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.teacher .areas li{border:1px solid var(--rule);background:var(--white);border-radius:999px;padding:6px 14px;font-size:15px;color:var(--muted)}
+
+/* ---------- Enroll ---------- */
+.enroll{padding:0 0 96px}
+.enroll-card{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;background:var(--white);border:1px solid var(--rule)}
+.price{padding:44px}
+.price h2{font:600 17px var(--text);color:var(--muted);margin-bottom:14px}
+.price .amount{font:800 clamp(52px,7vw,72px)/1 var(--display);color:var(--navy);letter-spacing:-.03em}
+.price .amount span{font-size:22px;font-weight:600;letter-spacing:0;color:var(--muted);margin-left:8px}
+.price .alt{margin-top:12px;color:var(--muted)}
+.price .alt strong{color:var(--ink)}
+.student{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding-top:22px;border-top:1px dashed var(--rule)}
+.student span{color:var(--muted)}
+.student strong{font:800 30px var(--display);color:var(--blue)}
+.student strong small{font-size:15px;font-weight:600;color:var(--muted);margin-left:4px}
+.contact{background:var(--yellow);color:var(--navy);padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.contact h2{font-size:clamp(32px,4vw,40px);font-weight:800;letter-spacing:-.02em}
+.contact p{font-size:17px;margin-top:10px;max-width:380px}
+.contact .ways{display:grid;gap:12px}
+.way{display:flex;align-items:center;gap:14px;background:var(--navy);color:var(--white);text-decoration:none;border-radius:10px;padding:16px 18px;transition:background .15s}
+.way:hover{background:var(--navy-2)}
+.way-form{background:var(--blue);padding:20px 18px}
+.way-form:hover{background:#2955B0}
+.way-form b{font-size:19px}
+.way svg{width:24px;height:24px;flex-shrink:0;color:var(--yellow)}
+.way small{display:block;font-size:13px;color:var(--on-dark)}
+.way b{font-weight:600;font-size:17px;word-break:break-word}
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-float{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;align-items:center;gap:10px;text-decoration:none}
+.wa-float .wa-bubble{width:62px;height:62px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 6px 20px rgba(10,30,74,.35);transition:transform .15s}
+.wa-float .wa-bubble svg{width:34px;height:34px}
+.wa-float .wa-label{background:var(--white);color:var(--navy);font:600 15px var(--text);padding:9px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(10,30,74,.2);opacity:0;transform:translateX(8px);transition:opacity .15s,transform .15s;pointer-events:none;white-space:nowrap}
+.wa-float:hover .wa-bubble,.wa-float:focus-visible .wa-bubble{transform:scale(1.07)}
+.wa-float:hover .wa-label,.wa-float:focus-visible .wa-label{opacity:1;transform:none}
+.wa-float .wa-bubble::after{content:"";position:absolute;width:62px;height:62px;border-radius:50%;border:2px solid #25D366;animation:waPulse 2.4s ease-out infinite}
+@keyframes waPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+@media (max-width:720px){.wa-float{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px))}.wa-float .wa-bubble{width:56px;height:56px}.wa-float .wa-bubble::after{width:56px;height:56px}.wa-float .wa-label{display:none}}
+@media (prefers-reduced-motion:reduce){.wa-float .wa-bubble::after{animation:none;display:none}}
+@media print{.wa-float{display:none}}
+
+/* ---------- Footer ---------- */
+footer{background:var(--navy);color:var(--on-dark);font-size:14px;padding:36px 0 calc(36px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .brand{width:110px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .units,.deliverables{grid-template-columns:repeat(2,1fr)}
+  .sec-head,.teacher{grid-template-columns:1fr;gap:10px}
+  .sec-head p{grid-column:1}
+  .indent{margin-left:0}
+  .split,.tools-eval,.enroll-card{grid-template-columns:1fr}
+  .logistics{grid-template-columns:repeat(2,1fr)}
+  .hero-map svg{right:-420px;opacity:.55}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .nav a:not(.btn){display:none}
+  .hero .wrap{padding-top:56px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(3){padding-left:0;border-left:0}
+  .fact:nth-child(n+3){border-top:1.5px solid var(--line)}
+  .fact b{font-size:44px}
+  .units,.deliverables,.outcomes,.pillars{grid-template-columns:1fr}
+  section.block{padding:72px 0}
+  .bar a{padding:0 12px;font-size:15px}
+  .bar a span{display:none}
+  .bar-legend{font-size:13px}
+  .level-head{flex-direction:column;align-items:flex-start}
+  .price,.contact,.panel{padding:28px}
+  .hero-map svg{right:-560px;opacity:.4}
+}
+@media (max-width:420px){.logistics{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ---------- Print ---------- */
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;font-size:11pt}
+  .top,.skip,.hero-cta,.bar-legend{display:none}
+  .hero,.project,footer,.unit.note,.panel.dark,.way{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .unit,.panel,.deliverables li,.enroll-card{break-inside:avoid}
+  .level{break-before:page}
+  section.block{padding:40px 0}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="239 817 2217 1011"><path fill="#F5E32A" fill-rule="evenodd" d="M1862.5 1798.1C1858.2 1796.9 1846.3 1791.2 1842.6 1788.7C1825.9 1777.1 1817.1 1755.3 1818.2 1727.8C1818.5 1718.1 1820.4 1714.9 1828.2 1710.9C1833.8 1708.0 1833.2 1705.9 1825.2 1701.1C1821.4 1698.9 1818.1 1697.0 1817.7 1697.0C1817.3 1697.0 1814.4 1695.0 1811.1 1692.5C1794.1 1679.6 1787.1 1666.8 1791.4 1656.7C1796.4 1645.1 1809.4 1639.3 1822.1 1643.2C1830.0 1645.5 1833.9 1640.4 1826.2 1637.9C1824.1 1637.3 1820.8 1635.2 1818.7 1633.4C1816.7 1631.5 1814.5 1630.0 1813.9 1630.0C1811.9 1630.0 1801.9 1619.6 1799.0 1614.5C1793.7 1605.2 1795.6 1596.7 1804.6 1589.3C1808.9 1585.8 1810.0 1585.5 1817.4 1584.8C1827.2 1584.0 1846.4 1585.6 1850.3 1587.6C1854.1 1589.5 1859.0 1589.4 1859.0 1587.5C1859.0 1585.7 1855.3 1583.7 1853.4 1584.4C1852.7 1584.7 1851.4 1584.2 1850.8 1583.4C1847.6 1579.5 1844.9 1577.3 1839.3 1574.2C1828.8 1568.3 1807.0 1546.1 1807.0 1541.3C1807.0 1540.5 1805.8 1537.1 1804.3 1533.7C1801.7 1527.7 1801.6 1527.0 1801.6 1509.0C1801.6 1498.8 1801.9 1484.9 1802.3 1478.0C1803.2 1460.1 1801.5 1438.4 1798.6 1430.0C1797.3 1426.3 1795.9 1421.3 1795.5 1418.9C1795.1 1416.5 1793.5 1412.0 1792.0 1409.0C1790.4 1406.0 1788.9 1402.2 1788.6 1400.5C1788.2 1398.8 1786.4 1395.2 1784.4 1392.5C1774.2 1377.8 1771.0 1373.0 1771.0 1372.1C1771.0 1371.6 1770.0 1369.9 1768.7 1368.3C1764.8 1363.6 1749.5 1334.5 1746.7 1326.5C1745.9 1324.3 1744.3 1320.7 1743.1 1318.5C1742.0 1316.3 1741.0 1313.5 1741.0 1312.2C1741.0 1310.9 1739.7 1306.8 1738.0 1303.0C1736.3 1299.2 1735.0 1295.1 1735.0 1293.8C1735.0 1292.5 1733.9 1288.0 1732.5 1283.8C1726.5 1265.0 1726.6 1210.9 1732.6 1193.6C1733.9 1189.8 1735.0 1185.4 1735.0 1184.0C1735.0 1182.5 1736.1 1179.3 1737.3 1176.9C1738.6 1174.5 1740.2 1170.9 1740.8 1169.0C1745.7 1154.3 1762.3 1129.0 1777.3 1113.4C1788.1 1102.1 1802.4 1089.4 1806.9 1087.0C1808.2 1086.4 1812.0 1083.7 1815.3 1081.2C1818.7 1078.6 1823.6 1075.4 1826.2 1074.0C1841.7 1066.0 1859.8 1057.0 1862.0 1056.4C1863.3 1056.0 1865.6 1054.9 1867.0 1053.9C1868.4 1052.9 1871.7 1051.6 1874.3 1051.0C1877.0 1050.4 1880.9 1049.1 1883.0 1048.0C1885.1 1046.9 1888.8 1045.8 1891.2 1045.4C1893.5 1045.0 1898.0 1043.7 1901.0 1042.5C1904.0 1041.2 1909.2 1039.9 1912.5 1039.5C1915.8 1039.1 1921.9 1037.7 1926.0 1036.4C1938.9 1032.4 1973.9 1030.7 2006.6 1032.5C2034.3 1034.1 2035.3 1034.2 2044.5 1037.0C2047.8 1037.9 2053.7 1039.1 2057.5 1039.5C2061.3 1039.9 2066.4 1041.0 2068.8 1042.1C2071.2 1043.1 2075.8 1044.4 2079.0 1045.0C2082.3 1045.6 2087.4 1047.2 2090.2 1048.5C2093.1 1049.9 2096.4 1051.0 2097.6 1051.0C2098.8 1051.0 2101.7 1052.1 2104.1 1053.3C2106.5 1054.6 2110.3 1056.3 2112.5 1057.0C2114.7 1057.7 2117.2 1058.9 2118.0 1059.6C2118.9 1060.3 2121.5 1061.6 2123.7 1062.4C2126.0 1063.2 2129.0 1064.6 2130.4 1065.5C2133.2 1067.3 2139.1 1070.6 2146.5 1074.5C2149.2 1075.9 2153.3 1078.4 2155.5 1080.1C2157.7 1081.7 2161.3 1084.3 2163.5 1085.8C2176.6 1094.6 2204.5 1121.7 2211.5 1132.5C2213.6 1135.8 2217.2 1141.0 2219.4 1144.0C2223.8 1149.9 2225.8 1153.5 2233.3 1168.7C2236.0 1174.1 2239.2 1180.5 2240.4 1183.0C2241.7 1185.5 2243.0 1189.0 2243.3 1190.7C2243.7 1192.5 2244.9 1196.1 2246.0 1198.6C2247.2 1201.1 2248.5 1205.6 2249.0 1208.5C2249.5 1211.4 2250.9 1216.9 2252.1 1220.7C2255.4 1231.1 2255.4 1272.3 2252.1 1282.0C2250.8 1285.6 2249.4 1291.2 2248.8 1294.5C2248.3 1297.8 2247.1 1301.8 2246.0 1303.5C2245.0 1305.1 2243.6 1308.5 2243.0 1311.0C2242.3 1313.5 2240.9 1316.7 2239.9 1318.2C2238.8 1319.7 2237.4 1322.4 2236.8 1324.2C2232.6 1336.2 2200.9 1376.6 2185.9 1389.0C2182.9 1391.4 2175.3 1398.0 2169.0 1403.5C2162.7 1409.1 2154.6 1415.6 2151.0 1418.1C2147.4 1420.5 2141.8 1424.6 2138.4 1427.1C2135.1 1429.7 2130.3 1432.8 2127.9 1434.0C2122.1 1436.9 2094.9 1464.4 2088.7 1473.5C2086.1 1477.3 2082.7 1482.3 2081.1 1484.5C2075.1 1492.7 2068.8 1503.5 2060.2 1520.1C2056.8 1526.8 2053.6 1532.8 2053.1 1533.4C2052.6 1534.0 2051.7 1536.3 2051.0 1538.5C2050.3 1540.7 2048.7 1544.4 2047.4 1546.7C2046.1 1549.0 2045.0 1551.5 2045.0 1552.2C2045.0 1558.1 2020.9 1583.0 2015.2 1583.0C2014.4 1583.0 2011.2 1584.2 2008.1 1585.8L2002.5 1588.5L1980.7 1588.4C1960.0 1588.3 1958.8 1588.2 1956.0 1586.1C1954.3 1584.9 1950.8 1583.5 1948.1 1583.0C1935.9 1580.7 1918.5 1563.4 1915.0 1550.0C1914.3 1547.5 1913.0 1543.9 1911.9 1541.9C1910.9 1539.9 1909.8 1535.9 1909.4 1532.9C1909.1 1529.9 1907.9 1525.5 1906.8 1523.0C1905.7 1520.5 1904.2 1514.7 1903.4 1510.1C1902.5 1505.4 1901.2 1500.3 1900.3 1498.6C1899.5 1497.0 1898.1 1491.0 1897.4 1485.2C1896.6 1479.5 1895.1 1471.9 1894.0 1468.3C1892.9 1464.7 1892.0 1459.7 1892.0 1457.1C1891.9 1449.3 1890.1 1439.1 1887.9 1434.8C1886.8 1432.6 1885.2 1427.6 1884.4 1423.6C1883.6 1419.7 1882.0 1414.1 1881.0 1411.3C1878.7 1405.0 1877.0 1388.9 1877.0 1372.7C1877.0 1364.8 1876.5 1359.0 1875.4 1355.3C1874.5 1352.3 1874.1 1348.7 1874.5 1347.2C1874.8 1345.8 1874.4 1339.0 1873.5 1332.1C1871.7 1318.5 1870.7 1315.4 1860.9 1295.5C1848.9 1270.8 1846.7 1257.9 1852.4 1245.0C1854.0 1241.4 1856.1 1237.3 1857.1 1235.8C1859.9 1232.0 1859.5 1227.6 1856.4 1225.1C1854.9 1223.9 1853.2 1223.0 1852.5 1223.0C1847.2 1223.0 1825.9 1196.6 1824.4 1188.0C1823.7 1184.4 1820.8 1176.2 1818.8 1172.3C1818.2 1171.0 1816.7 1169.8 1815.6 1169.4C1809.9 1167.8 1807.7 1166.4 1805.5 1162.5C1802.6 1157.6 1802.4 1153.7 1804.6 1145.5C1808.0 1133.0 1808.0 1132.0 1805.3 1132.0C1798.2 1132.0 1772.2 1171.5 1768.9 1187.2C1768.3 1190.1 1766.9 1194.2 1765.9 1196.3C1764.0 1199.9 1763.3 1204.1 1760.9 1226.3C1759.4 1241.0 1762.3 1273.4 1765.9 1281.6C1767.0 1284.0 1768.2 1288.1 1768.6 1290.7C1768.9 1293.4 1770.5 1298.5 1772.1 1302.2C1773.7 1305.8 1775.0 1309.4 1775.0 1310.0C1775.0 1312.0 1793.0 1347.9 1795.5 1350.8C1796.7 1352.3 1798.5 1355.3 1799.4 1357.5C1800.3 1359.7 1801.9 1362.4 1802.9 1363.5C1806.5 1367.5 1816.3 1382.6 1817.5 1386.0C1818.2 1388.0 1819.7 1391.1 1820.9 1393.0C1822.0 1394.9 1823.0 1397.4 1823.0 1398.6C1823.0 1399.8 1824.1 1402.8 1825.4 1405.3C1826.8 1407.8 1828.2 1412.0 1828.5 1414.7C1828.9 1417.3 1830.3 1422.8 1831.6 1426.9C1834.8 1436.6 1836.0 1459.8 1834.9 1488.5C1834.1 1510.0 1834.6 1524.1 1836.2 1527.3C1840.3 1535.2 1856.8 1551.2 1865.4 1555.6C1867.7 1556.7 1873.4 1559.7 1878.1 1562.2C1882.8 1564.7 1887.7 1567.1 1889.1 1567.5C1890.4 1567.9 1892.6 1569.1 1894.0 1570.0C1895.4 1571.0 1898.4 1572.3 1900.8 1572.9C1903.1 1573.6 1906.5 1574.9 1908.3 1576.0C1910.0 1577.0 1913.5 1578.4 1916.0 1579.0C1918.4 1579.7 1922.5 1581.2 1925.0 1582.5C1927.6 1583.8 1931.4 1585.2 1933.6 1585.6C1935.7 1586.0 1939.1 1587.4 1941.0 1588.6C1943.2 1590.2 1945.9 1591.0 1948.6 1591.0C1951.5 1591.0 1954.0 1591.9 1957.1 1594.0C1959.5 1595.6 1963.5 1597.2 1966.0 1597.6C1968.5 1597.9 1971.8 1599.0 1973.5 1600.0C1975.2 1600.9 1978.7 1602.3 1981.4 1602.9C1984.1 1603.6 1987.5 1604.9 1988.9 1606.0C1990.4 1607.0 1993.5 1608.3 1996.0 1609.0C1998.5 1609.7 2001.6 1611.0 2003.0 1612.0C2004.4 1612.9 2006.6 1614.1 2008.0 1614.5C2016.5 1617.0 2031.0 1628.4 2035.0 1635.8C2040.7 1646.2 2039.0 1655.2 2029.7 1663.8C2024.0 1669.1 2009.8 1671.3 1998.5 1668.5C1991.6 1666.8 1984.2 1666.6 1982.0 1668.0C1979.7 1669.4 1981.8 1671.9 1988.3 1675.8C1995.0 1679.7 2005.5 1689.2 2007.6 1693.1C2009.2 1696.4 2009.5 1705.7 2007.9 1709.7C2006.6 1713.1 2002.4 1717.7 1998.9 1719.5C1993.7 1722.2 1979.9 1723.5 1971.1 1722.1C1957.1 1719.8 1953.6 1723.0 1963.3 1729.4C1970.6 1734.2 1972.5 1736.6 1974.6 1743.2C1977.1 1751.3 1974.8 1759.3 1968.4 1764.6C1963.1 1768.9 1950.4 1771.6 1940.4 1770.5C1932.6 1769.7 1931.1 1771.1 1932.7 1777.3C1934.7 1784.6 1930.8 1791.1 1923.1 1793.4C1920.6 1794.2 1916.7 1795.6 1914.5 1796.6C1911.2 1798.0 1906.7 1798.3 1888.0 1798.6C1875.6 1798.8 1864.2 1798.5 1862.5 1798.1ZM1903.8 1770.1C1908.2 1767.8 1906.1 1763.5 1899.9 1762.4C1898.0 1762.1 1893.6 1760.8 1890.0 1759.5C1886.4 1758.2 1881.5 1756.5 1879.0 1755.7C1871.8 1753.3 1864.8 1750.8 1860.7 1749.2C1857.3 1747.8 1856.8 1747.8 1855.3 1749.2C1851.0 1753.6 1863.1 1768.5 1873.1 1771.1C1878.0 1772.3 1901.0 1771.6 1903.8 1770.1ZM1996.5 1559.0C1998.8 1557.9 2002.5 1555.4 2004.7 1553.5C2008.7 1550.1 2017.0 1537.6 2017.0 1535.1C2017.0 1533.5 2035.6 1496.1 2037.5 1494.0C2038.2 1493.2 2039.5 1490.8 2040.4 1488.7C2041.2 1486.6 2042.9 1483.7 2044.1 1482.2C2045.2 1480.7 2048.0 1476.6 2050.3 1473.0C2064.3 1451.0 2087.4 1424.8 2099.5 1417.2C2101.7 1415.9 2103.7 1414.5 2104.0 1414.3C2104.3 1414.0 2104.7 1407.4 2105.1 1399.6C2105.6 1386.4 2105.8 1384.9 2108.7 1378.9C2110.3 1375.4 2112.3 1370.3 2112.9 1367.6C2113.6 1364.9 2115.0 1361.0 2116.0 1358.9C2117.1 1356.8 2118.0 1353.8 2118.0 1352.3C2118.0 1350.8 2119.2 1346.3 2120.5 1342.5C2121.9 1338.7 2123.7 1332.7 2124.5 1329.3C2125.3 1325.9 2126.8 1321.7 2128.0 1319.8C2129.1 1318.0 2130.0 1315.8 2130.0 1315.0C2130.0 1314.2 2131.3 1310.8 2132.9 1307.5C2136.2 1300.3 2137.4 1293.8 2136.4 1287.2C2135.9 1283.4 2134.8 1281.6 2131.0 1277.8C2125.7 1272.4 2125.2 1272.3 2113.6 1274.5C2109.2 1275.3 2104.7 1275.8 2103.6 1275.5C2086.1 1270.7 2075.8 1265.2 2072.8 1259.0C2071.9 1257.1 2069.8 1252.7 2068.1 1249.3C2066.4 1245.9 2064.6 1240.2 2064.0 1236.8C2061.8 1222.7 2063.5 1201.0 2067.6 1192.3C2068.9 1189.5 2070.0 1186.7 2070.0 1186.3C2070.0 1184.4 2078.0 1173.3 2082.2 1169.4C2093.4 1158.9 2102.9 1156.1 2120.8 1158.1C2126.1 1158.7 2133.0 1160.1 2136.0 1161.2C2139.0 1162.3 2143.8 1163.8 2146.5 1164.5C2149.2 1165.2 2152.9 1166.4 2154.7 1167.1C2159.3 1169.0 2161.4 1167.0 2160.7 1161.4C2160.0 1154.7 2154.3 1148.8 2144.0 1143.8C2133.2 1138.7 2126.0 1138.3 2116.1 1142.5C2106.6 1146.4 2102.5 1146.3 2098.6 1141.8C2091.1 1133.1 2089.3 1127.6 2083.9 1095.0C2082.8 1088.4 2081.1 1086.0 2073.3 1079.5C2063.9 1071.8 2056.5 1067.9 2049.0 1066.9C2045.4 1066.5 2039.8 1065.1 2036.5 1063.9C2030.1 1061.6 2008.7 1060.1 2001.6 1061.4C1996.7 1062.3 1996.0 1065.5 1998.8 1073.5C2002.3 1083.5 2002.5 1086.4 2000.0 1091.5C1997.5 1096.6 1991.0 1102.5 1986.5 1103.6C1984.8 1104.0 1981.5 1105.3 1979.0 1106.5C1976.5 1107.7 1972.9 1109.1 1971.0 1109.5C1969.1 1109.9 1965.5 1111.3 1963.0 1112.5C1960.5 1113.7 1956.9 1115.0 1955.0 1115.4C1953.1 1115.7 1949.2 1116.9 1946.5 1118.0C1943.8 1119.0 1938.8 1120.7 1935.6 1121.6C1929.6 1123.2 1921.0 1129.7 1921.0 1132.6C1921.0 1133.3 1919.4 1136.9 1917.5 1140.5C1915.6 1144.2 1913.8 1148.8 1913.4 1150.8C1913.0 1152.9 1911.2 1157.5 1909.4 1161.2C1906.4 1167.2 1905.3 1168.3 1900.7 1170.6C1895.9 1173.1 1895.2 1173.2 1891.1 1172.1C1885.0 1170.5 1884.1 1171.8 1887.4 1177.3C1892.5 1186.2 1902.2 1190.8 1923.4 1194.6C1927.7 1195.3 1932.3 1196.6 1933.5 1197.4C1934.7 1198.2 1937.9 1199.5 1940.7 1200.3C1949.0 1202.8 1959.2 1210.9 1963.3 1218.3C1966.4 1223.9 1966.8 1225.5 1967.3 1234.6C1968.1 1249.9 1970.2 1252.6 1982.7 1254.8C1986.0 1255.4 1990.5 1256.7 1992.7 1257.8C1994.8 1258.9 1998.0 1260.1 1999.9 1260.5C2004.9 1261.6 2014.6 1268.1 2018.0 1272.7C2023.0 1279.5 2024.7 1293.4 2021.2 1299.7C2014.1 1313.0 1999.0 1331.2 1987.3 1340.7C1965.1 1358.6 1962.2 1361.1 1956.4 1367.2C1949.8 1374.0 1945.1 1380.4 1940.2 1389.0C1938.5 1392.0 1934.1 1397.1 1930.5 1400.4C1919.2 1410.4 1918.6 1411.8 1919.3 1426.3C1919.7 1433.0 1920.9 1443.5 1922.0 1449.5C1923.1 1455.5 1924.3 1464.3 1924.6 1469.0C1925.0 1473.7 1926.3 1480.9 1927.6 1485.0C1928.8 1489.1 1930.2 1495.2 1930.5 1498.5C1930.9 1501.8 1932.2 1506.8 1933.5 1509.6C1934.7 1512.5 1936.1 1517.1 1936.5 1520.0C1936.9 1522.9 1938.5 1528.0 1940.1 1531.4C1941.7 1534.8 1943.0 1538.4 1943.0 1539.5C1943.0 1544.2 1950.9 1553.1 1956.6 1555.0C1958.7 1555.7 1962.7 1557.4 1965.5 1558.6C1972.4 1561.9 1990.1 1562.1 1996.5 1559.0ZM311.5 1509.9C309.9 1509.4 303.9 1507.9 298.3 1506.6C284.4 1503.4 279.0 1499.0 275.9 1488.6C274.8 1484.7 273.3 1479.5 272.5 1477.0C270.3 1469.5 269.5 1456.8 269.7 1429.5C270.1 1360.0 271.0 1294.2 271.6 1291.5C271.9 1289.8 272.6 1275.2 273.1 1259.0C273.6 1242.8 274.5 1221.4 275.0 1211.5C275.6 1201.6 276.2 1174.6 276.5 1151.5C276.7 1128.4 277.2 1107.2 277.5 1104.5C277.8 1101.8 278.5 1093.4 278.9 1086.0C279.4 1078.6 280.5 1069.2 281.5 1065.2C283.1 1058.4 283.5 1057.7 287.9 1054.7L292.5 1051.5L309.0 1051.2C327.5 1050.8 330.6 1051.4 336.5 1056.4L340.5 1059.8L341.2 1116.1C341.7 1147.1 342.4 1212.5 343.0 1261.5C344.7 1410.3 346.3 1471.6 349.0 1489.9C350.7 1501.6 350.1 1502.4 333.9 1507.2C321.3 1510.9 316.8 1511.5 311.5 1509.9ZM823.0 1507.8C814.5 1506.2 805.2 1503.9 802.5 1502.8C799.8 1501.7 795.4 1500.2 792.8 1499.5C790.2 1498.8 786.8 1497.3 785.2 1496.1C783.6 1495.0 781.2 1493.6 779.9 1493.1C768.7 1488.8 741.3 1465.0 732.7 1451.9C730.7 1448.9 727.7 1444.5 725.9 1442.0C724.2 1439.5 721.9 1435.7 720.9 1433.5C719.9 1431.3 718.4 1428.4 717.6 1427.0C714.5 1421.7 709.0 1409.3 709.0 1407.6C709.0 1406.7 707.9 1403.4 706.6 1400.2C705.3 1397.0 703.3 1389.7 702.1 1383.8C701.0 1377.9 699.6 1372.1 698.9 1370.8C694.1 1361.9 694.5 1263.8 699.4 1250.2C700.2 1247.9 701.6 1241.3 702.4 1235.7C703.1 1230.1 704.5 1223.7 705.5 1221.5C706.4 1219.3 707.8 1214.2 708.6 1210.2C709.3 1206.2 710.8 1201.3 711.9 1199.2C712.9 1197.2 714.2 1193.2 714.8 1190.4C715.4 1187.6 717.1 1183.1 718.5 1180.5C719.9 1177.8 721.0 1175.0 721.0 1174.1C721.0 1173.2 722.4 1170.2 724.0 1167.5C725.6 1164.8 727.0 1161.8 727.0 1161.0C727.0 1160.2 727.8 1158.2 728.7 1156.5C729.6 1154.8 731.0 1152.2 731.9 1150.5C744.3 1127.8 751.0 1119.0 772.0 1097.9C789.3 1080.5 802.5 1069.0 805.4 1069.0C805.9 1069.0 807.7 1068.0 809.4 1066.7C811.1 1065.4 814.8 1063.6 817.5 1062.5C820.2 1061.5 823.4 1060.1 824.5 1059.4C825.6 1058.7 829.5 1057.4 833.1 1056.6C836.7 1055.7 841.4 1054.3 843.5 1053.5C856.2 1048.1 902.6 1048.3 915.0 1053.7C917.5 1054.8 921.7 1056.2 924.4 1056.9C928.7 1058.0 932.8 1060.0 946.5 1068.0C956.0 1073.6 971.1 1088.0 979.0 1099.0C983.0 1104.5 989.0 1114.7 989.0 1115.9C989.0 1116.5 990.3 1120.2 991.9 1124.2C993.4 1128.2 995.0 1134.1 995.4 1137.3C995.7 1140.5 996.8 1144.6 997.6 1146.3C999.6 1150.1 999.0 1158.2 996.5 1161.0C993.8 1163.9 985.5 1165.3 973.7 1164.8C960.1 1164.2 956.8 1162.2 955.0 1153.3C954.3 1150.1 953.0 1145.5 951.9 1143.0C950.9 1140.5 949.6 1136.5 949.0 1134.1C948.4 1131.7 945.1 1124.3 941.7 1117.7C936.3 1107.1 934.4 1104.4 926.5 1096.5C909.3 1079.1 893.6 1074.1 871.4 1079.0C863.4 1080.7 859.9 1082.2 846.9 1089.4C841.5 1092.4 835.3 1097.6 823.7 1108.9C804.3 1127.8 793.4 1144.5 775.3 1182.4C774.1 1185.2 773.0 1188.3 773.0 1189.4C773.0 1190.6 772.1 1193.0 770.9 1194.9C769.8 1196.8 768.2 1201.5 767.4 1205.3C766.6 1209.1 765.2 1213.6 764.4 1215.2C763.6 1216.8 762.2 1221.6 761.4 1225.8C760.6 1230.0 759.1 1236.2 758.0 1239.5C756.9 1242.8 755.6 1249.8 755.0 1255.0C754.4 1260.2 753.5 1266.2 752.9 1268.3C747.6 1288.3 747.6 1354.8 752.9 1364.8C753.5 1365.9 754.4 1369.7 755.0 1373.3C756.5 1383.1 765.2 1404.1 770.7 1411.6C772.0 1413.3 773.0 1415.2 773.0 1415.8C773.0 1420.8 806.2 1453.0 811.4 1453.0C812.0 1453.0 814.1 1454.1 816.0 1455.4C817.9 1456.6 821.3 1458.3 823.5 1459.0C825.7 1459.7 829.1 1461.2 831.2 1462.2C838.5 1466.0 864.3 1467.6 879.3 1465.3C897.2 1462.4 918.0 1448.2 929.5 1431.0C935.1 1422.6 941.8 1408.2 943.0 1402.2C943.5 1399.6 944.5 1395.9 945.3 1394.0C947.3 1389.1 949.4 1367.3 948.6 1359.9C947.9 1352.6 946.2 1350.4 941.2 1349.8C937.6 1349.3 925.2 1350.7 912.5 1353.0C909.2 1353.6 899.1 1354.5 890.0 1355.0C880.9 1355.6 869.0 1356.4 863.5 1357.0C839.6 1359.5 837.9 1359.5 829.1 1356.5C810.9 1350.5 813.2 1341.4 834.0 1337.1C851.2 1333.6 855.6 1333.0 862.6 1333.0C869.2 1333.0 889.6 1330.8 901.0 1328.9C904.0 1328.4 916.4 1327.6 928.5 1327.1C940.6 1326.6 952.5 1325.9 955.0 1325.5C957.5 1325.1 964.5 1325.5 970.8 1326.4C980.3 1327.6 982.8 1328.4 986.7 1330.9C989.3 1332.6 991.6 1334.0 992.0 1334.0C994.3 1334.0 1000.5 1345.1 1003.6 1354.6C1007.8 1367.7 1008.2 1378.8 1004.9 1391.5C1003.7 1395.9 1002.2 1402.0 1001.6 1405.0C999.4 1414.7 989.7 1432.8 980.2 1444.8C970.8 1456.7 949.3 1476.9 940.4 1482.2C938.8 1483.2 934.4 1486.0 930.5 1488.4C926.6 1490.9 923.1 1492.9 922.6 1493.0C922.1 1493.0 920.3 1494.1 918.5 1495.4C916.8 1496.7 913.4 1498.4 910.9 1499.0C908.5 1499.7 905.1 1501.0 903.5 1502.0C901.9 1502.9 894.0 1505.4 886.0 1507.4C866.3 1512.3 847.2 1512.5 823.0 1507.8ZM1657.4 1507.5C1645.5 1504.6 1643.7 1503.9 1639.1 1500.0C1634.6 1496.2 1633.8 1494.8 1632.0 1488.6C1630.8 1484.7 1629.4 1480.4 1628.9 1479.0C1626.7 1474.0 1625.5 1454.9 1625.7 1429.0C1626.2 1351.5 1627.0 1293.2 1627.6 1291.0C1627.9 1289.6 1628.6 1275.2 1629.1 1259.0C1629.6 1242.8 1630.5 1221.4 1631.0 1211.5C1631.6 1201.6 1632.2 1174.6 1632.5 1151.5C1632.7 1128.4 1633.2 1107.2 1633.5 1104.5C1633.8 1101.8 1634.5 1093.4 1634.9 1086.0C1635.4 1078.6 1636.5 1069.2 1637.5 1065.2C1639.1 1058.4 1639.5 1057.7 1643.9 1054.7L1648.5 1051.5L1665.0 1051.2C1683.5 1050.8 1686.6 1051.4 1692.5 1056.4L1696.5 1059.8L1697.3 1116.6C1697.7 1147.9 1698.5 1213.3 1699.0 1262.0C1700.7 1410.1 1702.3 1471.6 1705.0 1489.9C1706.7 1501.6 1706.1 1502.4 1689.9 1507.2C1674.9 1511.6 1673.9 1511.7 1657.4 1507.5ZM1534.5 1486.9C1528.9 1486.5 1526.2 1485.7 1521.0 1482.7C1514.5 1479.1 1503.4 1468.7 1500.9 1463.9C1500.1 1462.5 1497.4 1458.5 1494.7 1454.9C1488.8 1446.9 1480.2 1434.1 1477.4 1429.2C1476.3 1427.2 1473.3 1422.3 1470.8 1418.4C1468.2 1414.4 1465.1 1409.3 1463.8 1406.9C1462.5 1404.6 1460.1 1400.1 1458.3 1397.1C1456.6 1394.0 1454.4 1389.9 1453.5 1388.0C1452.7 1386.1 1451.3 1383.4 1450.4 1382.0C1449.6 1380.6 1448.2 1377.9 1447.4 1376.0C1446.6 1374.1 1445.3 1371.4 1444.4 1370.0C1443.6 1368.6 1442.2 1365.9 1441.4 1364.0C1440.6 1362.1 1439.1 1358.7 1438.1 1356.5C1431.0 1341.6 1429.0 1337.2 1429.0 1336.5C1429.0 1335.7 1427.4 1332.2 1419.4 1315.5C1418.1 1312.7 1417.0 1309.8 1417.0 1309.0C1417.0 1308.2 1415.9 1305.6 1414.5 1303.2C1413.1 1300.8 1411.4 1296.7 1410.6 1294.1C1409.9 1291.6 1408.3 1287.9 1407.1 1286.0C1406.0 1284.1 1405.0 1281.8 1405.0 1280.9C1405.0 1280.0 1403.7 1276.8 1402.0 1273.7C1400.3 1270.6 1399.0 1267.5 1399.0 1266.7C1399.0 1266.0 1397.7 1262.8 1396.0 1259.5C1394.4 1256.2 1393.0 1252.8 1393.0 1252.0C1393.0 1251.2 1391.6 1247.8 1390.0 1244.5C1388.4 1241.2 1387.0 1237.9 1387.0 1237.2C1387.0 1236.5 1385.7 1233.4 1384.0 1230.3C1382.3 1227.2 1381.0 1224.1 1381.0 1223.3C1381.0 1222.5 1379.4 1218.2 1377.4 1213.7C1373.1 1203.8 1371.7 1202.5 1368.6 1205.6C1367.2 1207.0 1367.0 1217.8 1367.0 1309.1C1367.0 1365.2 1366.8 1411.5 1366.6 1411.9C1366.3 1412.4 1365.6 1416.5 1365.0 1421.1C1364.5 1425.7 1363.6 1432.7 1363.0 1436.5C1362.4 1440.3 1361.5 1450.3 1361.1 1458.5C1360.2 1474.7 1358.0 1481.8 1352.8 1485.4C1349.6 1487.6 1323.3 1487.7 1319.0 1485.5C1314.9 1483.4 1310.6 1474.3 1312.0 1470.6C1312.5 1469.1 1313.3 1462.8 1313.7 1456.7C1314.8 1440.2 1314.3 1269.6 1313.1 1217.5C1310.6 1118.5 1310.6 1118.6 1313.1 1108.0C1315.8 1096.0 1315.9 1095.7 1322.6 1091.5C1335.4 1083.3 1361.5 1083.3 1374.2 1091.3C1380.7 1095.5 1387.7 1103.4 1391.2 1110.5C1392.6 1113.2 1395.4 1118.7 1397.5 1122.5C1399.5 1126.3 1401.8 1131.2 1402.6 1133.3C1403.3 1135.4 1404.8 1138.3 1405.8 1139.8C1406.9 1141.3 1408.3 1144.3 1409.0 1146.5C1409.7 1148.7 1411.4 1152.5 1412.7 1154.9C1413.9 1157.3 1415.0 1159.9 1415.0 1160.6C1415.0 1161.4 1416.6 1164.9 1418.5 1168.6C1420.4 1172.2 1422.0 1175.8 1422.0 1176.6C1422.0 1177.4 1422.9 1179.8 1424.0 1181.8C1426.5 1186.6 1434.0 1203.5 1434.0 1204.4C1434.0 1205.1 1437.8 1213.7 1442.5 1223.5C1443.8 1226.2 1445.4 1230.0 1446.0 1231.9C1446.5 1233.8 1447.7 1236.1 1448.4 1236.9C1449.2 1237.8 1450.4 1240.5 1451.0 1243.0C1451.7 1245.5 1453.0 1248.6 1454.0 1250.1C1455.0 1251.5 1456.2 1253.9 1456.6 1255.6C1456.9 1257.2 1458.3 1260.3 1459.5 1262.5C1460.7 1264.7 1462.1 1267.6 1462.5 1269.0C1462.8 1270.4 1464.2 1273.8 1465.5 1276.5C1469.7 1285.4 1475.0 1297.7 1475.0 1298.6C1475.0 1299.3 1478.1 1306.1 1484.5 1319.5C1485.8 1322.2 1487.2 1325.6 1487.6 1327.0C1488.0 1328.4 1489.1 1330.7 1490.1 1332.1C1491.1 1333.5 1492.2 1335.9 1492.6 1337.6C1493.0 1339.2 1494.6 1343.0 1496.1 1346.0C1497.7 1349.0 1499.0 1352.1 1499.0 1352.9C1499.0 1353.7 1500.1 1356.2 1501.4 1358.4C1502.7 1360.7 1504.3 1364.3 1505.0 1366.4C1506.5 1371.0 1512.4 1379.6 1515.0 1381.0C1518.4 1382.8 1521.9 1382.2 1522.4 1379.8C1523.5 1374.9 1524.1 1363.2 1525.0 1334.5C1525.6 1318.0 1526.4 1300.7 1526.9 1296.0C1527.4 1291.3 1528.4 1283.0 1529.0 1277.5C1529.6 1272.0 1530.5 1260.1 1531.0 1251.0C1531.5 1241.9 1532.4 1231.6 1532.9 1228.0C1535.5 1211.2 1536.1 1205.5 1537.0 1191.5C1537.6 1183.2 1538.5 1173.8 1539.0 1170.5C1541.1 1158.5 1542.9 1142.3 1543.0 1135.5C1543.0 1131.6 1544.1 1122.7 1545.4 1115.7C1546.8 1108.7 1548.2 1098.6 1548.5 1093.3C1548.8 1087.9 1550.2 1078.5 1551.5 1072.5C1552.8 1066.5 1554.2 1058.1 1554.5 1054.0C1555.8 1039.3 1560.7 1021.6 1564.5 1018.0C1569.0 1013.8 1587.2 1012.0 1605.5 1014.0C1618.8 1015.5 1618.8 1015.5 1620.0 1020.1C1621.3 1024.9 1619.6 1048.9 1617.0 1062.5C1615.5 1070.2 1613.0 1091.9 1613.0 1097.5C1613.0 1100.2 1612.3 1105.4 1611.5 1109.0C1609.5 1117.7 1607.1 1136.1 1607.0 1143.3C1607.0 1146.5 1606.6 1151.0 1606.1 1153.3C1603.6 1164.9 1603.0 1169.0 1602.0 1181.7C1601.4 1189.3 1600.2 1200.2 1599.3 1206.0C1596.6 1223.9 1596.1 1228.0 1595.0 1243.5C1594.4 1251.8 1593.5 1261.2 1593.0 1264.5C1590.3 1282.9 1589.8 1288.0 1588.9 1304.0C1588.4 1313.6 1587.6 1324.9 1587.1 1329.0C1585.0 1346.5 1583.9 1359.7 1583.0 1379.0C1582.0 1399.6 1581.6 1404.1 1578.6 1427.0C1577.7 1433.9 1577.0 1442.9 1577.0 1447.0C1577.0 1455.0 1575.2 1465.0 1572.3 1473.9C1570.5 1479.2 1570.4 1479.3 1562.5 1483.0C1553.8 1487.2 1547.9 1488.0 1534.5 1486.9ZM382.7 1485.2C378.1 1482.4 375.1 1475.2 376.1 1469.4C379.3 1450.9 379.7 1333.1 377.0 1217.0C374.7 1113.8 374.7 1118.5 377.0 1108.0C379.6 1096.4 380.2 1095.4 387.6 1090.8C392.8 1087.6 394.7 1087.1 404.1 1086.1C414.0 1085.0 425.0 1085.7 431.4 1087.6C439.1 1090.0 450.5 1101.0 455.2 1110.5C456.6 1113.2 459.4 1118.7 461.5 1122.5C463.6 1126.3 465.9 1131.2 466.6 1133.3C467.4 1135.4 468.8 1138.3 469.8 1139.8C470.9 1141.3 472.5 1144.9 473.4 1147.7C474.4 1150.6 475.5 1153.2 476.0 1153.5C476.5 1153.8 477.6 1156.3 478.6 1159.2C479.5 1162.0 481.5 1166.7 483.1 1169.7C484.7 1172.7 486.0 1176.0 486.0 1177.0C486.0 1178.1 486.4 1179.1 486.9 1179.4C487.4 1179.8 489.1 1183.3 490.6 1187.3C492.1 1191.2 493.9 1195.4 494.6 1196.5C495.3 1197.6 496.6 1200.5 497.5 1203.0C499.0 1207.4 501.8 1213.6 506.5 1223.5C507.8 1226.2 509.4 1230.2 510.0 1232.2C510.6 1234.2 511.7 1236.4 512.5 1237.0C513.2 1237.6 514.2 1239.6 514.5 1241.3C514.9 1243.1 516.2 1246.4 517.5 1248.7C518.8 1251.0 520.6 1255.2 521.5 1257.9C522.4 1260.7 523.5 1263.2 524.0 1263.5C524.5 1263.8 525.6 1266.4 526.6 1269.3C527.5 1272.1 528.6 1275.0 529.1 1275.6C529.9 1276.6 534.6 1287.5 538.1 1296.5C539.9 1301.1 542.5 1306.9 548.5 1319.5C549.8 1322.2 551.2 1325.6 551.6 1327.0C552.0 1328.4 553.1 1330.7 554.1 1332.1C555.1 1333.5 556.2 1335.9 556.6 1337.6C557.0 1339.2 558.6 1343.0 560.1 1346.0C561.7 1349.0 563.0 1352.1 563.0 1352.9C563.0 1353.7 564.1 1356.2 565.4 1358.4C566.7 1360.7 568.3 1364.3 569.0 1366.4C570.5 1371.0 576.4 1379.6 579.0 1381.0C582.4 1382.8 585.9 1382.2 586.4 1379.8C587.5 1374.9 588.1 1363.2 589.0 1334.5C589.5 1318.0 590.4 1300.7 590.9 1296.0C591.4 1291.3 592.4 1283.0 593.0 1277.5C593.6 1272.0 594.5 1260.1 595.0 1251.0C595.5 1241.9 596.4 1231.6 596.9 1228.0C599.4 1212.1 600.1 1205.6 601.0 1191.5C601.6 1183.2 602.4 1174.0 602.9 1171.0C603.4 1168.0 604.3 1162.6 604.9 1159.0C605.5 1155.4 606.2 1147.1 606.6 1140.5C606.9 1133.9 608.3 1122.7 609.6 1115.6C610.9 1108.5 612.2 1098.3 612.6 1093.1C612.9 1087.8 614.2 1078.5 615.5 1072.5C616.8 1066.5 618.2 1058.1 618.5 1054.0C619.9 1038.5 624.9 1021.1 629.0 1017.7C633.5 1013.9 648.4 1012.3 665.9 1013.8C673.4 1014.4 680.3 1015.2 681.2 1015.5C684.3 1016.7 685.2 1023.1 684.0 1035.8C682.3 1054.9 682.0 1057.3 681.0 1062.5C679.6 1070.0 678.1 1082.1 677.0 1096.0C676.5 1102.9 675.4 1110.9 674.6 1113.9C673.8 1116.8 672.6 1125.4 672.0 1132.9C670.9 1146.8 669.4 1157.8 667.9 1163.9C667.5 1165.7 666.6 1173.6 666.0 1181.4C665.4 1189.1 664.2 1200.2 663.3 1206.0C660.7 1223.6 660.0 1229.0 659.0 1243.5C658.4 1251.2 657.5 1260.4 657.0 1264.0C654.3 1284.2 653.3 1294.8 653.1 1306.0C653.0 1312.8 652.6 1318.8 652.3 1319.3C652.0 1319.8 651.4 1324.3 650.9 1329.3C650.4 1334.4 649.5 1343.0 648.9 1348.5C648.4 1354.0 647.5 1367.7 647.0 1379.0C646.0 1399.6 645.6 1404.3 642.6 1426.5C641.8 1433.1 641.0 1442.1 641.0 1446.5C641.0 1455.6 639.1 1466.0 636.1 1473.9C633.7 1480.3 635.0 1479.0 626.0 1483.4C618.6 1487.0 618.3 1487.0 605.8 1487.0C593.2 1487.0 593.1 1487.0 586.3 1483.4C579.2 1479.7 568.0 1469.7 565.2 1464.4C564.3 1462.8 561.4 1458.5 558.8 1454.9C552.4 1446.3 540.9 1429.1 540.3 1427.1C540.0 1426.2 539.0 1424.6 538.0 1423.5C536.4 1421.4 529.8 1410.7 528.6 1408.0C528.3 1407.2 526.0 1403.1 523.5 1399.0C521.1 1394.9 518.3 1389.9 517.5 1388.0C516.6 1386.1 515.3 1383.4 514.4 1382.0C513.6 1380.6 512.2 1377.9 511.4 1376.0C510.6 1374.1 509.3 1371.4 508.4 1370.0C507.6 1368.6 506.2 1365.9 505.4 1364.0C504.6 1362.1 503.1 1358.7 502.1 1356.5C495.0 1341.6 493.0 1337.2 493.0 1336.5C493.0 1335.7 491.4 1332.2 483.4 1315.5C482.1 1312.7 481.0 1309.8 481.0 1309.0C481.0 1308.2 479.9 1305.6 478.5 1303.2C477.1 1300.8 475.4 1296.7 474.6 1294.1C473.9 1291.6 472.3 1287.9 471.1 1286.0C470.0 1284.1 469.0 1281.8 469.0 1280.9C469.0 1280.0 467.6 1276.8 466.0 1273.7C464.4 1270.6 463.0 1267.5 463.0 1266.7C463.0 1266.0 461.7 1262.8 460.0 1259.5C458.4 1256.2 457.0 1252.8 457.0 1252.0C457.0 1251.2 455.6 1247.8 454.0 1244.5C452.4 1241.2 451.0 1237.9 451.0 1237.2C451.0 1236.5 449.6 1233.4 448.0 1230.3C446.4 1227.2 445.0 1224.1 445.0 1223.3C445.0 1222.5 443.4 1218.2 441.4 1213.7C437.1 1203.8 435.7 1202.5 432.6 1205.6C431.2 1207.0 431.0 1217.7 431.0 1309.1C431.0 1365.2 430.8 1411.5 430.6 1411.9C430.3 1412.4 429.6 1416.5 429.0 1421.1C428.5 1425.7 427.6 1432.7 427.0 1436.5C426.4 1440.3 425.5 1450.3 425.1 1458.5C424.2 1474.7 422.0 1481.8 416.8 1485.4C413.4 1487.8 386.6 1487.7 382.7 1485.2ZM1083.5 1481.8C1066.2 1480.4 1064.3 1480.0 1060.9 1477.7C1053.4 1472.7 1052.6 1468.8 1051.0 1430.0C1050.5 1417.1 1049.6 1400.4 1049.0 1393.0C1048.4 1385.6 1047.5 1372.8 1046.8 1364.5C1045.3 1343.6 1045.3 1205.4 1046.9 1179.5C1048.4 1155.2 1049.7 1123.8 1050.8 1091.0C1051.6 1067.2 1051.7 1066.3 1054.3 1061.0C1055.8 1058.0 1057.0 1055.0 1057.0 1054.3C1057.0 1050.7 1069.5 1040.4 1077.0 1037.8C1079.5 1036.9 1083.5 1035.5 1086.0 1034.7C1088.5 1033.8 1097.2 1031.7 1105.5 1030.0C1119.7 1027.0 1121.3 1026.8 1136.5 1027.3C1145.3 1027.6 1155.0 1028.3 1158.0 1028.9C1173.1 1031.7 1182.0 1033.0 1186.7 1033.0C1189.5 1033.0 1194.7 1033.9 1198.2 1035.0C1201.6 1036.1 1208.3 1037.5 1213.0 1038.1C1217.7 1038.7 1224.9 1040.2 1229.0 1041.5C1233.1 1042.8 1240.0 1044.3 1244.3 1044.9C1248.6 1045.5 1253.7 1046.8 1255.8 1047.9C1257.8 1048.9 1261.4 1050.3 1263.7 1050.9C1266.2 1051.6 1268.7 1053.1 1269.7 1054.6C1270.7 1056.0 1272.5 1058.4 1273.8 1060.0C1276.9 1063.9 1276.6 1065.2 1272.0 1069.4C1268.7 1072.3 1267.2 1073.0 1263.7 1073.0C1261.4 1073.0 1256.5 1073.5 1252.9 1074.0C1245.1 1075.1 1232.5 1073.3 1226.3 1070.2C1224.2 1069.1 1220.5 1067.9 1218.0 1067.5C1215.5 1067.1 1209.8 1065.7 1205.2 1064.4C1200.7 1063.1 1192.4 1061.6 1186.7 1061.1C1181.1 1060.6 1172.2 1059.2 1167.0 1058.0C1160.5 1056.6 1153.5 1055.8 1144.8 1055.7C1129.6 1055.5 1129.1 1055.8 1125.9 1066.5C1122.3 1078.5 1121.9 1089.1 1121.4 1175.7L1120.9 1260.0L1123.5 1262.6C1126.4 1265.5 1128.3 1265.5 1141.5 1262.7C1145.3 1261.9 1152.1 1260.9 1156.5 1260.5C1160.9 1260.1 1167.2 1259.2 1170.5 1258.4C1186.0 1254.8 1218.3 1258.1 1224.3 1263.8C1235.1 1274.0 1226.4 1280.2 1197.5 1283.0C1186.2 1284.1 1177.1 1285.5 1172.0 1287.0C1170.1 1287.6 1162.2 1288.5 1154.5 1289.1C1141.0 1290.1 1138.9 1290.4 1129.0 1293.1C1120.4 1295.4 1120.8 1293.9 1121.4 1324.0C1122.0 1351.6 1123.2 1376.3 1125.0 1396.0C1125.5 1402.3 1126.4 1414.7 1126.8 1423.5C1127.9 1444.8 1127.3 1444.0 1140.8 1443.4C1146.7 1443.2 1155.1 1442.5 1159.5 1442.0C1163.9 1441.4 1174.7 1440.8 1183.5 1440.5C1199.2 1439.9 1204.7 1439.5 1228.0 1436.9C1247.9 1434.6 1258.2 1435.1 1267.0 1438.8C1276.4 1442.6 1278.7 1445.3 1277.0 1450.4C1275.5 1455.0 1273.3 1456.4 1264.0 1458.4C1259.9 1459.4 1253.7 1460.8 1250.3 1461.6C1246.9 1462.3 1242.2 1463.0 1239.9 1463.0C1235.6 1463.0 1223.2 1465.0 1212.5 1467.5C1209.2 1468.2 1202.2 1469.1 1197.0 1469.5C1191.8 1469.9 1182.9 1471.3 1177.3 1472.6C1171.6 1473.9 1164.9 1475.0 1162.3 1475.0C1156.4 1475.1 1142.5 1477.2 1134.5 1479.4C1131.2 1480.3 1123.1 1481.2 1116.5 1481.4C1109.9 1481.6 1102.2 1482.0 1099.5 1482.3C1096.8 1482.6 1089.5 1482.4 1083.5 1481.8ZM2361.0 1467.7C2357.7 1466.0 2353.5 1463.2 2348.3 1459.5C2335.8 1450.5 2328.4 1445.0 2318.5 1437.7C2312.4 1433.2 2302.3 1425.7 2296.0 1421.1C2277.7 1407.8 2274.0 1403.5 2274.0 1396.0C2274.0 1388.1 2278.7 1385.1 2289.0 1386.3C2293.9 1386.9 2306.0 1394.5 2320.2 1405.9C2323.3 1408.4 2328.1 1412.1 2330.9 1414.0C2333.7 1415.9 2339.3 1420.0 2343.3 1423.1C2347.2 1426.2 2352.8 1430.2 2355.5 1432.1C2367.1 1440.0 2372.3 1444.4 2376.5 1449.8C2382.2 1457.1 2382.5 1460.7 2377.6 1465.6C2374.6 1468.6 2373.6 1469.0 2368.8 1469.0C2365.9 1469.0 2362.4 1468.4 2361.0 1467.7ZM1908.5 1392.5C1912.8 1388.9 1916.7 1385.7 1917.4 1385.2C1918.9 1384.3 1924.3 1377.2 1926.0 1374.0C1931.0 1364.6 1947.4 1348.1 1969.1 1330.8C1982.6 1320.0 1988.7 1313.8 1993.2 1306.3C1994.2 1304.8 1997.0 1300.6 1999.5 1297.1C2005.0 1289.4 2005.1 1288.1 2000.0 1282.6C1995.5 1277.7 1986.5 1274.0 1973.3 1271.5C1964.7 1269.9 1958.2 1266.3 1954.0 1261.0C1951.3 1257.6 1950.7 1255.7 1949.5 1246.1C1947.5 1231.3 1945.1 1224.9 1939.7 1221.0C1937.4 1219.3 1934.4 1217.6 1933.0 1217.3C1931.6 1217.0 1928.5 1215.7 1926.0 1214.5C1923.5 1213.2 1918.2 1211.7 1914.1 1211.1C1910.1 1210.5 1906.0 1209.6 1905.1 1209.1C1904.2 1208.6 1899.9 1207.4 1895.5 1206.5C1885.7 1204.3 1882.1 1201.5 1867.7 1185.0C1859.9 1176.0 1856.3 1172.8 1851.6 1170.2C1843.3 1165.8 1843.0 1165.2 1843.0 1154.4C1843.0 1143.8 1845.7 1137.1 1853.4 1129.1C1864.4 1117.6 1885.4 1115.3 1895.2 1124.6C1899.0 1128.3 1900.8 1127.4 1905.4 1119.6C1907.7 1115.8 1910.2 1112.4 1911.0 1112.0C1911.8 1111.5 1915.2 1109.9 1918.5 1108.2C1921.8 1106.6 1926.6 1104.9 1929.0 1104.5C1931.5 1104.1 1935.2 1102.9 1937.2 1101.9C1939.3 1100.8 1943.6 1099.4 1946.9 1098.6C1950.3 1097.8 1954.4 1096.3 1956.2 1095.2C1958.0 1094.1 1961.2 1092.9 1963.3 1092.6C1968.9 1091.6 1979.7 1085.4 1980.3 1082.8C1980.7 1081.6 1979.6 1077.1 1977.9 1072.6C1973.9 1061.9 1973.7 1061.7 1970.9 1060.3C1967.4 1058.6 1945.6 1060.6 1935.5 1063.5C1931.1 1064.8 1925.0 1066.1 1922.0 1066.5C1919.0 1066.9 1913.7 1068.3 1910.3 1069.7C1906.9 1071.0 1902.4 1072.4 1900.3 1072.7C1898.2 1073.0 1894.5 1074.3 1892.0 1075.5C1889.5 1076.8 1885.5 1078.3 1883.0 1079.0C1880.5 1079.7 1877.4 1081.0 1875.9 1082.0C1874.5 1083.0 1872.1 1084.2 1870.4 1084.6C1866.6 1085.5 1855.8 1091.5 1853.6 1093.9C1852.6 1094.9 1850.6 1099.1 1849.1 1103.0C1847.5 1107.0 1842.9 1115.0 1838.9 1120.8C1834.8 1126.7 1830.7 1133.2 1829.8 1135.3C1828.8 1137.4 1827.1 1140.5 1826.0 1142.0C1823.2 1145.9 1823.5 1149.4 1826.7 1152.5C1828.2 1153.9 1829.8 1155.0 1830.1 1155.0C1830.7 1155.0 1832.9 1158.2 1838.4 1166.8C1839.7 1168.8 1841.0 1172.6 1841.4 1175.3C1841.8 1178.8 1843.5 1182.4 1848.4 1189.8C1855.6 1200.7 1859.8 1205.1 1865.1 1207.3C1871.0 1209.7 1877.4 1216.7 1879.9 1223.3L1882.0 1229.1L1879.5 1235.1C1878.2 1238.5 1875.7 1243.2 1874.1 1245.7C1869.7 1252.3 1868.7 1258.5 1870.5 1266.7C1872.2 1274.4 1877.2 1285.9 1880.7 1290.6C1882.0 1292.3 1883.0 1294.0 1883.0 1294.4C1883.0 1294.8 1884.3 1298.2 1885.9 1301.8C1888.6 1308.0 1889.5 1311.7 1893.5 1333.5C1894.3 1338.2 1895.0 1348.2 1895.0 1357.5C1895.2 1387.6 1896.6 1399.0 1900.1 1399.0C1900.5 1399.0 1904.3 1396.1 1908.5 1392.5ZM2133.2 1393.2C2161.9 1370.4 2174.1 1358.8 2187.0 1341.7C2198.4 1326.6 2204.3 1317.5 2208.1 1309.0C2209.2 1306.5 2211.0 1302.7 2212.1 1300.5C2213.2 1298.3 2214.9 1293.3 2216.0 1289.5C2217.0 1285.7 2218.6 1280.5 2219.5 1278.0C2220.9 1274.3 2221.2 1269.7 2221.2 1251.5C2221.3 1230.4 2221.2 1229.2 2218.7 1222.0C2217.3 1217.9 2215.8 1212.7 2215.4 1210.5C2215.1 1208.3 2213.5 1203.5 2211.9 1199.8C2210.3 1196.2 2209.0 1192.6 2209.0 1191.8C2209.0 1191.1 2207.9 1188.9 2206.6 1187.0C2205.3 1185.1 2203.9 1182.4 2203.5 1181.0C2203.1 1179.6 2201.1 1175.8 2199.2 1172.5C2197.2 1169.2 2194.5 1164.5 2193.1 1162.2C2191.7 1159.8 2189.3 1156.3 2187.8 1154.5C2186.2 1152.7 2185.0 1150.8 2185.0 1150.3C2185.0 1148.9 2175.0 1140.7 2174.2 1141.4C2173.9 1141.8 2174.1 1142.9 2174.8 1143.8C2175.5 1144.7 2176.5 1146.6 2177.1 1148.0C2177.7 1149.4 2179.3 1152.8 2180.6 1155.5C2185.1 1165.0 2183.5 1183.0 2177.8 1186.1C2174.0 1188.2 2155.8 1187.5 2150.2 1185.0C2147.7 1183.9 2142.8 1182.3 2139.3 1181.5C2135.8 1180.7 2131.1 1179.0 2128.7 1177.8C2125.2 1176.0 2122.7 1175.6 2114.4 1175.6C2104.4 1175.5 2104.3 1175.5 2099.8 1179.0C2094.4 1183.1 2089.0 1190.6 2086.7 1197.0C2085.8 1199.5 2084.4 1203.3 2083.6 1205.5C2082.6 1208.2 2082.1 1213.3 2082.0 1221.1L2082.0 1232.8L2086.1 1240.9C2092.8 1254.4 2099.2 1257.3 2117.3 1255.1C2124.0 1254.3 2128.9 1254.2 2131.5 1254.8C2141.2 1257.0 2153.0 1269.8 2154.4 1279.6C2156.2 1293.0 2154.3 1309.8 2150.0 1317.8C2146.7 1324.1 2142.9 1334.2 2141.4 1341.0C2140.6 1344.6 2139.1 1349.8 2138.0 1352.5C2137.0 1355.2 2135.8 1359.5 2135.5 1362.0C2135.1 1364.5 2133.8 1369.0 2132.5 1372.0C2130.5 1376.9 2128.1 1382.8 2124.7 1391.2C2123.9 1393.2 2123.9 1394.2 2124.9 1395.4C2126.8 1397.7 2127.9 1397.4 2133.2 1393.2ZM2310.0 1180.8C2306.0 1179.3 2303.2 1173.4 2304.3 1168.8C2306.1 1161.8 2316.6 1155.3 2331.0 1152.3C2335.1 1151.5 2339.7 1150.1 2341.2 1149.4C2342.7 1148.6 2347.0 1147.3 2350.7 1146.6C2354.4 1145.8 2359.2 1144.4 2361.2 1143.6C2363.3 1142.7 2367.3 1141.5 2370.2 1140.9C2373.1 1140.4 2378.4 1138.8 2382.0 1137.5C2391.6 1134.0 2406.8 1130.7 2412.8 1130.7C2421.6 1130.7 2428.3 1137.6 2426.1 1144.3C2424.2 1150.0 2415.3 1156.2 2407.0 1157.5C2404.6 1157.9 2399.9 1159.3 2396.5 1160.5C2393.2 1161.7 2388.5 1163.1 2386.0 1163.5C2383.6 1163.9 2379.6 1165.1 2377.1 1166.2C2374.6 1167.2 2369.4 1168.8 2365.5 1169.6C2361.7 1170.4 2356.5 1171.9 2354.0 1172.9C2351.5 1174.0 2347.2 1175.1 2344.5 1175.5C2341.8 1175.9 2337.0 1177.3 2333.9 1178.6C2327.0 1181.4 2315.0 1182.5 2310.0 1180.8ZM1878.4 1160.8C1879.4 1157.0 1879.1 1143.0 1878.0 1140.9C1876.5 1138.3 1871.9 1138.4 1869.2 1141.2C1863.7 1147.2 1864.0 1154.0 1870.0 1159.4C1874.6 1163.5 1877.5 1164.0 1878.4 1160.8ZM2162.6 1126.8C2159.7 1121.9 2149.2 1112.5 2139.5 1106.1C2135.7 1103.6 2131.4 1100.7 2130.0 1099.7C2123.5 1095.0 2110.2 1088.0 2107.8 1088.0C2104.1 1088.0 2102.6 1090.9 2103.9 1095.8C2104.4 1097.8 2105.1 1103.1 2105.5 1107.4C2106.6 1121.7 2109.1 1123.9 2121.7 1122.0C2132.3 1120.3 2143.5 1121.8 2149.2 1125.5C2153.2 1128.1 2163.0 1131.9 2164.3 1131.2C2164.7 1131.0 2163.9 1129.0 2162.6 1126.8ZM2190.2 1049.4C2186.0 1047.2 2185.0 1044.7 2185.0 1036.1C2185.0 1031.4 2185.6 1028.3 2187.0 1025.6C2188.1 1023.4 2189.7 1019.4 2190.6 1016.6C2191.6 1013.8 2193.4 1009.5 2194.7 1007.1C2195.9 1004.7 2197.0 1002.1 2197.0 1001.4C2197.0 1000.6 2198.1 997.7 2199.4 994.8C2202.1 988.7 2205.2 981.1 2208.5 972.5C2212.0 963.3 2217.0 951.7 2217.9 950.6C2218.4 950.0 2219.5 947.2 2220.4 944.3C2222.2 938.9 2228.7 932.6 2233.8 931.3C2245.0 928.5 2248.6 946.0 2240.6 963.7C2238.6 968.1 2237.0 972.4 2237.0 973.1C2237.0 973.9 2235.8 976.3 2234.5 978.5C2233.1 980.7 2232.0 983.2 2232.0 984.0C2232.0 984.8 2230.7 988.2 2229.1 991.5C2227.5 994.8 2225.9 999.1 2225.5 1001.0C2225.1 1002.9 2223.7 1006.3 2222.4 1008.6C2221.1 1010.8 2220.0 1013.3 2220.0 1014.1C2220.0 1014.9 2218.7 1018.2 2217.1 1021.5C2215.5 1024.8 2213.9 1029.1 2213.5 1031.0C2212.7 1035.1 2205.9 1045.7 2202.4 1048.3C2198.9 1050.9 2194.1 1051.3 2190.2 1049.4ZM1783.5 1036.1C1779.2 1033.5 1764.5 1015.1 1749.5 993.4C1746.8 989.5 1742.0 982.9 1738.9 978.9C1718.0 951.5 1715.2 944.4 1722.1 936.6C1726.3 931.8 1728.1 931.4 1734.3 934.3C1740.8 937.3 1746.6 943.5 1757.5 959.5C1759.4 962.2 1762.2 966.2 1763.7 968.2C1765.3 970.2 1768.8 974.9 1771.5 978.6C1778.8 988.3 1791.0 1004.7 1795.2 1010.7C1798.9 1015.8 1803.0 1026.0 1803.0 1029.9C1803.0 1031.0 1801.8 1033.2 1800.4 1034.9C1798.1 1037.7 1797.3 1038.0 1792.2 1038.0C1788.4 1038.0 1785.5 1037.4 1783.5 1036.1ZM1956.7 972.9C1948.9 968.8 1948.6 966.3 1949.7 902.7L1950.5 855.9L1955.2 851.4C1960.9 846.1 1965.1 845.5 1969.4 849.5C1975.4 855.0 1975.3 854.5 1974.6 910.5C1974.2 938.5 1973.4 963.2 1972.9 965.2C1972.2 967.7 1970.7 969.8 1967.8 971.9C1962.9 975.5 1961.8 975.6 1956.7 972.9Z"></path><path fill="#FFFFFF" fill-rule="evenodd" d="M1187.8 1630.4C1182.2 1627.4 1182.0 1625.9 1182.0 1592.9L1182.0 1562.8L1185.9 1558.9L1189.7 1555.0L1198.6 1554.9C1203.5 1554.9 1212.0 1554.8 1217.6 1554.7L1227.7 1554.5L1233.3 1558.8C1239.0 1563.1 1244.0 1569.4 1246.6 1575.5C1247.6 1577.9 1248.0 1583.0 1248.0 1593.0C1248.0 1612.6 1249.3 1614.4 1257.3 1606.2C1263.1 1600.4 1263.1 1598.9 1257.9 1593.2L1253.7 1588.7L1254.3 1579.2C1255.0 1567.8 1256.9 1564.7 1267.1 1558.8C1273.4 1555.1 1273.7 1555.0 1284.0 1555.0C1290.5 1555.0 1295.3 1555.5 1296.6 1556.3C1297.8 1556.9 1300.5 1558.5 1302.6 1559.7C1306.6 1561.9 1313.0 1570.2 1313.0 1573.2C1313.0 1575.5 1307.5 1581.7 1303.9 1583.6C1300.1 1585.5 1300.2 1587.8 1304.2 1591.6C1308.7 1595.9 1312.4 1605.6 1311.6 1610.6C1310.4 1617.7 1306.1 1623.9 1299.6 1627.9C1293.7 1631.5 1293.7 1631.5 1282.1 1631.5C1269.1 1631.5 1265.4 1630.1 1256.5 1621.8C1254.2 1619.7 1251.8 1618.0 1251.1 1618.0C1250.5 1618.0 1248.9 1620.4 1247.6 1623.4C1243.8 1632.0 1236.2 1634.6 1230.1 1629.4C1224.9 1625.1 1224.7 1623.9 1224.9 1605.9C1225.2 1582.6 1223.6 1578.0 1215.0 1578.0C1206.4 1578.0 1204.8 1582.6 1205.1 1605.9C1205.3 1623.9 1205.1 1625.1 1199.9 1629.4C1196.4 1632.4 1192.0 1632.7 1187.8 1630.4ZM1043.8 1630.5C1043.5 1630.2 1039.7 1628.6 1035.3 1627.1C1016.8 1620.6 1004.4 1605.8 1001.4 1586.5C997.3 1561.2 1008.0 1538.8 1029.2 1528.2C1037.5 1524.1 1054.2 1521.3 1060.7 1522.9C1063.0 1523.5 1066.1 1524.0 1067.7 1524.0C1071.9 1524.0 1086.6 1531.8 1090.5 1536.2C1096.0 1542.2 1094.8 1549.5 1087.7 1553.9C1082.8 1556.9 1080.0 1556.5 1070.7 1551.8C1063.0 1547.9 1062.0 1547.6 1054.0 1547.6C1041.6 1547.6 1032.6 1553.0 1027.5 1563.5C1024.6 1569.6 1024.7 1584.2 1027.7 1589.0C1038.8 1606.8 1058.5 1610.8 1077.0 1599.2C1083.3 1595.2 1088.1 1597.4 1092.9 1606.3C1096.1 1612.1 1094.9 1615.3 1087.5 1621.0C1079.0 1627.5 1067.9 1631.0 1054.9 1631.0C1049.1 1631.0 1044.1 1630.8 1043.8 1630.5ZM1121.5 1627.8C1114.0 1624.5 1106.4 1618.7 1105.4 1615.7C1105.1 1614.7 1103.4 1612.3 1101.7 1610.3L1098.5 1606.7L1098.5 1593.1L1098.5 1579.5L1102.2 1573.5C1106.5 1566.5 1110.4 1562.7 1118.0 1557.9L1123.5 1554.5L1136.0 1554.5C1148.4 1554.5 1148.6 1554.5 1154.5 1557.9C1163.4 1562.9 1166.8 1566.6 1171.3 1576.0C1177.0 1587.8 1177.1 1595.9 1171.8 1607.1C1162.1 1627.4 1140.5 1636.3 1121.5 1627.8ZM1337.9 1627.5C1330.8 1623.9 1326.3 1619.3 1322.7 1612.0C1320.7 1607.8 1320.5 1605.9 1320.2 1584.4C1319.8 1557.5 1320.1 1556.3 1327.4 1553.5C1331.5 1551.9 1332.0 1551.9 1335.4 1553.5C1342.7 1557.0 1343.0 1558.0 1343.1 1578.9C1343.1 1600.6 1343.8 1603.6 1349.2 1606.5L1353.0 1608.5L1356.8 1606.5C1362.2 1603.6 1362.9 1600.6 1362.9 1578.9C1363.0 1558.0 1363.3 1557.0 1370.6 1553.5C1373.9 1551.9 1374.5 1551.9 1378.4 1553.4C1385.5 1556.1 1385.5 1555.8 1385.8 1589.9C1386.0 1611.4 1385.8 1621.1 1385.0 1623.1C1383.0 1627.8 1379.4 1629.4 1370.5 1629.7C1366.1 1629.9 1358.5 1630.2 1353.5 1630.5C1344.7 1631.0 1344.3 1630.9 1337.9 1627.5ZM1398.0 1628.4C1391.4 1622.8 1391.6 1624.6 1392.4 1572.0C1393.1 1518.9 1392.7 1521.6 1400.4 1517.7C1404.1 1515.7 1404.2 1515.7 1408.8 1517.6C1411.5 1518.7 1414.0 1520.6 1414.7 1522.0C1415.7 1523.9 1416.0 1536.4 1416.0 1573.9L1416.0 1623.2L1412.1 1627.1C1407.3 1632.0 1402.8 1632.4 1398.0 1628.4ZM1443.9 1627.1L1440.0 1623.2L1440.0 1602.7C1440.0 1591.4 1439.7 1581.5 1439.4 1580.6C1439.1 1579.8 1436.6 1578.4 1434.0 1577.5C1427.2 1575.2 1421.6 1569.0 1422.4 1564.7C1423.3 1560.5 1428.6 1555.2 1433.2 1554.0C1439.1 1552.4 1440.0 1550.2 1440.0 1537.7C1440.0 1525.6 1441.2 1522.0 1446.0 1519.5C1450.3 1517.3 1454.4 1517.6 1457.9 1520.6C1462.7 1524.6 1463.4 1526.7 1463.1 1536.2C1463.0 1541.0 1463.4 1546.7 1464.0 1549.0C1465.0 1552.6 1465.5 1553.1 1469.5 1554.1C1474.4 1555.3 1475.9 1556.7 1479.3 1563.1C1482.2 1568.5 1484.7 1568.6 1490.0 1563.6C1498.1 1555.9 1502.1 1554.5 1516.0 1554.5C1528.5 1554.5 1528.5 1554.5 1534.0 1557.9C1542.3 1563.1 1547.5 1568.6 1550.6 1575.4C1553.2 1580.9 1553.4 1582.6 1553.4 1592.1C1553.4 1602.3 1553.3 1603.0 1549.8 1610.1C1545.3 1619.2 1540.0 1623.9 1529.6 1628.0C1515.6 1633.6 1501.2 1630.9 1489.1 1620.4C1478.7 1611.4 1473.4 1590.9 1478.8 1579.9C1482.7 1572.0 1481.0 1568.2 1476.0 1573.5C1474.7 1574.9 1472.0 1576.5 1470.1 1577.0C1463.6 1578.8 1463.5 1579.0 1463.4 1589.7C1463.4 1595.1 1463.3 1604.8 1463.2 1611.4L1463.0 1623.2L1459.1 1627.1C1456.0 1630.2 1454.5 1631.0 1451.5 1631.0C1448.5 1631.0 1447.0 1630.2 1443.9 1627.1ZM1564.9 1627.2L1560.9 1623.5L1560.6 1593.0C1560.3 1559.6 1560.5 1558.4 1565.9 1555.5C1568.2 1554.4 1572.0 1554.1 1583.3 1554.3C1597.2 1554.5 1597.8 1554.6 1601.6 1557.2C1608.7 1562.2 1613.0 1560.4 1614.9 1551.8C1615.5 1549.2 1616.8 1545.0 1617.9 1542.3C1618.9 1539.7 1620.1 1535.6 1620.4 1533.4C1621.7 1525.9 1623.8 1524.9 1637.6 1525.2C1653.7 1525.6 1653.7 1526.0 1637.2 1544.0C1631.2 1550.5 1631.1 1551.1 1634.6 1554.3L1637.2 1556.8L1637.1 1582.3C1636.9 1611.2 1637.0 1612.5 1641.4 1614.7C1645.5 1616.8 1646.0 1617.6 1646.0 1623.2C1646.0 1630.8 1645.5 1631.0 1626.0 1631.0C1606.5 1631.0 1606.0 1630.8 1606.0 1623.2C1606.0 1617.6 1606.5 1616.8 1610.7 1614.6C1614.8 1612.5 1615.3 1609.9 1614.9 1593.7C1614.6 1585.4 1614.1 1580.8 1613.2 1579.7C1612.1 1578.4 1609.8 1578.2 1599.9 1578.4C1582.8 1578.7 1583.6 1577.5 1583.2 1603.5L1582.8 1623.9L1578.9 1627.5C1573.6 1632.2 1570.2 1632.2 1564.9 1627.2ZM1673.9 1627.9C1664.5 1624.1 1657.8 1618.0 1653.2 1609.1C1650.2 1603.1 1650.0 1602.1 1650.0 1592.1C1650.0 1582.6 1650.3 1581.0 1652.7 1576.2C1656.5 1568.7 1661.7 1563.1 1669.2 1558.4L1675.5 1554.5L1688.0 1554.5L1700.5 1554.5L1707.6 1558.7C1716.8 1564.2 1720.1 1568.0 1723.9 1577.9L1727.0 1586.0L1726.8 1605.2L1726.5 1624.4L1722.2 1627.7C1717.1 1631.5 1713.0 1631.9 1709.3 1629.0C1706.1 1626.5 1703.4 1626.5 1697.9 1629.0C1691.2 1632.0 1683.2 1631.6 1673.9 1627.9ZM1139.7 1606.9C1143.7 1605.4 1149.8 1599.2 1151.1 1595.3C1152.4 1591.2 1151.6 1588.6 1147.3 1583.3C1141.4 1575.9 1132.6 1575.4 1126.0 1582.0C1119.4 1588.6 1119.9 1597.4 1127.3 1603.3C1133.3 1608.2 1135.0 1608.7 1139.7 1606.9ZM1524.6 1603.5C1532.1 1597.4 1532.6 1588.6 1526.0 1582.0C1519.4 1575.4 1510.6 1575.9 1504.7 1583.3C1498.7 1590.7 1498.9 1595.6 1505.8 1602.3C1512.7 1609.0 1517.5 1609.3 1524.6 1603.5ZM1695.5 1604.3C1704.7 1596.7 1705.8 1591.1 1699.7 1583.7C1693.5 1576.1 1685.3 1575.2 1678.4 1581.2C1671.3 1587.5 1671.6 1597.2 1679.3 1603.3C1686.2 1608.9 1689.7 1609.1 1695.5 1604.3Z"></path></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></symbol>
+    <symbol id="i-form" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" d="M6 3h9l4 4v14H6z M15 3v4h4 M9 12h7 M9 16h5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 5.5h18v13H3z M3.5 6l8.5 7 8.5-7"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Ingenio Consultoría, inicio"><svg><use href="#logo"/></svg></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#plan">Plan de estudio</a>
+      <a href="#ruta">Contenido</a>
+      <a href="#inversion">Inversión</a>
+      <a class="btn btn-primary btn-sm" href="https://forms.gle/SDqaLNd56DMR9TC39" target="_blank" rel="noopener">Inscribirme</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+<!-- ======================= PORTADA ======================= -->
+<section class="hero" aria-labelledby="titulo">
+  <div class="hero-map" aria-hidden="true">
+    <svg viewBox="140 0 840 940">
+      <path class="c-minor" d="M615 470 L614 474 L612 478 L608 481 L603 483 L598 485 L593 486 L588 486 L585 487 L583 489 L581 491 L580 494 L579 497 L578 501 L576 505 L573 509 L569 512 L565 514 L560 515 L555 515 L551 514 L546 513 L542 511 L538 509 L534 507 L530 505 L527 502 L524 500 L521 497 L520 493 L519 489 L520 486 L521 482 L523 478 L525 475 L526 472 L527 470 L527 468 L526 465 L524 462 L522 458 L519 454 L518 450 L517 445 L518 441 L520 437 L523 434 L528 432 L533 432 L538 432 L544 433 L548 434 L552 435 L556 435 L560 435 L564 435 L567 435 L571 435 L575 435 L579 436 L583 438 L586 439 L589 442 L591 444 L594 447 L596 449 L599 451 L603 454 L606 456 L609 459 L612 462 L614 466 Z"/>
+<path class="c-minor" d="M662 470 L660 477 L655 484 L647 489 L638 494 L629 497 L620 498 L612 500 L606 502 L602 505 L599 509 L598 514 L596 521 L593 528 L589 536 L583 542 L577 548 L569 551 L560 553 L551 552 L543 551 L535 549 L527 546 L519 542 L512 539 L505 535 L498 531 L492 526 L488 520 L485 513 L484 506 L486 499 L488 492 L492 485 L496 479 L499 474 L500 470 L500 466 L497 461 L493 455 L488 448 L484 441 L480 432 L480 423 L481 415 L486 409 L493 404 L502 401 L511 400 L521 400 L530 402 L538 403 L546 404 L553 405 L560 405 L567 405 L574 404 L581 405 L588 406 L595 408 L602 410 L607 414 L612 419 L617 423 L622 427 L627 431 L633 435 L639 440 L646 444 L652 450 L658 456 L661 463 Z"/>
+<path class="c-minor" d="M710 470 L706 481 L698 490 L686 498 L673 504 L659 508 L646 511 L635 514 L627 517 L622 521 L618 528 L616 536 L613 546 L609 556 L603 567 L594 576 L584 583 L572 587 L560 589 L547 589 L535 587 L523 584 L512 580 L500 576 L489 571 L478 566 L469 560 L460 552 L454 544 L450 533 L450 523 L452 511 L457 501 L463 492 L468 483 L472 476 L474 470 L472 464 L467 457 L461 448 L453 438 L447 426 L443 414 L442 402 L445 390 L452 381 L463 374 L476 371 L490 369 L503 370 L516 371 L528 373 L539 374 L550 374 L560 374 L570 373 L581 373 L591 374 L602 376 L611 379 L620 384 L628 390 L635 396 L642 402 L649 408 L657 414 L666 419 L676 425 L687 432 L697 440 L705 449 L709 459 Z"/>
+<path class="c-major" d="M758 470 L752 484 L740 496 L724 506 L706 514 L688 519 L671 523 L658 527 L649 531 L642 538 L638 547 L635 558 L631 571 L625 585 L616 598 L605 609 L591 617 L576 623 L560 625 L544 624 L528 622 L512 619 L496 614 L481 610 L466 605 L451 598 L438 590 L427 580 L419 567 L416 554 L416 539 L420 524 L427 510 L434 498 L442 487 L446 478 L447 470 L444 462 L437 452 L427 441 L417 427 L409 412 L404 396 L404 380 L409 365 L419 354 L434 346 L451 341 L468 339 L486 339 L503 341 L518 342 L533 343 L546 343 L560 342 L574 341 L588 341 L601 342 L615 346 L627 351 L638 358 L648 366 L657 374 L666 382 L676 389 L687 396 L700 403 L715 410 L729 419 L742 430 L752 442 L758 456 Z"/>
+<path class="c-minor" d="M805 470 L796 487 L781 502 L760 514 L738 524 L716 530 L697 535 L681 540 L670 547 L663 555 L659 567 L654 581 L649 598 L641 614 L630 629 L616 642 L599 651 L580 657 L560 659 L540 659 L520 657 L501 653 L481 649 L462 644 L442 639 L424 631 L407 620 L394 607 L385 591 L381 574 L382 555 L388 536 L397 519 L407 504 L416 491 L420 480 L420 470 L415 460 L405 447 L393 433 L380 416 L370 397 L365 377 L366 358 L374 341 L387 327 L405 318 L426 312 L448 310 L469 310 L490 310 L508 311 L526 311 L543 310 L560 308 L577 308 L595 308 L612 311 L628 316 L643 324 L656 333 L667 343 L679 353 L690 363 L703 371 L718 379 L735 387 L754 395 L772 406 L789 419 L801 435 L807 452 Z"/>
+<path class="c-minor" d="M853 470 L840 490 L821 508 L796 522 L769 533 L744 541 L722 547 L705 554 L693 562 L685 573 L680 588 L675 605 L668 624 L658 643 L644 660 L626 674 L606 684 L583 690 L560 693 L536 693 L513 691 L489 688 L466 684 L442 680 L418 673 L395 664 L376 652 L360 635 L350 615 L347 593 L350 570 L358 548 L369 527 L381 510 L390 495 L395 482 L393 470 L385 457 L372 443 L357 425 L342 405 L331 382 L326 358 L329 336 L339 317 L356 301 L378 290 L402 284 L428 281 L453 280 L476 280 L498 279 L519 278 L539 276 L560 274 L581 274 L602 275 L622 280 L641 287 L658 297 L673 309 L686 321 L699 333 L714 343 L730 352 L749 361 L771 370 L794 380 L817 393 L836 409 L850 428 L856 449 Z"/>
+<path class="c-minor" d="M899 470 L883 493 L859 514 L830 530 L799 542 L771 551 L747 559 L728 567 L716 578 L708 592 L702 610 L696 630 L687 652 L674 673 L657 691 L637 706 L613 716 L587 723 L560 725 L533 726 L506 725 L478 723 L450 720 L421 716 L393 709 L366 698 L343 683 L326 663 L316 639 L313 613 L318 585 L329 559 L342 535 L356 515 L366 498 L369 484 L365 470 L354 455 L338 438 L320 417 L303 393 L292 367 L287 340 L292 315 L305 293 L325 276 L351 264 L379 256 L408 253 L436 251 L463 249 L488 247 L512 244 L536 241 L560 239 L584 239 L609 242 L632 249 L653 259 L672 271 L689 286 L704 300 L720 313 L737 324 L757 334 L780 343 L807 352 L835 364 L862 379 L885 398 L900 421 L905 445 Z"/>
+<path class="c-major" d="M945 470 L925 496 L896 519 L863 537 L829 551 L798 561 L772 571 L753 582 L740 595 L732 612 L725 632 L717 655 L706 679 L691 702 L671 721 L646 737 L619 747 L590 754 L560 757 L529 759 L498 759 L466 759 L433 757 L400 753 L367 746 L337 733 L311 715 L292 691 L282 663 L280 632 L288 600 L301 570 L317 543 L331 521 L341 502 L343 486 L336 470 L322 453 L303 433 L282 409 L264 381 L252 351 L248 321 L255 294 L271 270 L295 251 L325 238 L356 230 L388 224 L419 221 L449 218 L477 214 L504 210 L532 206 L560 203 L588 204 L616 209 L642 218 L665 231 L686 247 L704 263 L722 279 L740 293 L760 305 L784 315 L813 324 L845 334 L878 348 L909 365 L934 387 L949 413 L953 442 Z"/>
+<path class="c-minor" d="M989 470 L965 499 L932 524 L895 544 L858 559 L824 572 L798 583 L778 596 L765 612 L756 632 L748 655 L739 681 L725 707 L707 730 L684 751 L656 766 L626 777 L593 784 L560 788 L526 791 L491 794 L455 795 L417 795 L378 792 L341 783 L307 769 L278 748 L258 719 L248 686 L249 650 L258 614 L274 580 L292 551 L307 526 L316 506 L316 488 L307 470 L289 450 L266 427 L243 400 L224 369 L212 336 L210 303 L220 273 L239 248 L267 228 L299 213 L334 203 L369 196 L402 191 L435 185 L466 179 L497 174 L528 169 L560 167 L592 169 L623 176 L651 188 L677 204 L699 223 L719 242 L739 259 L759 274 L783 286 L812 295 L846 304 L883 316 L921 331 L956 351 L983 376 L999 406 L1001 438 Z"/>
+<path class="c-minor" d="M1032 470 L1004 502 L967 529 L926 551 L886 568 L852 582 L824 596 L805 612 L791 630 L782 653 L773 679 L761 707 L745 734 L723 759 L696 779 L665 795 L632 806 L596 814 L560 819 L522 824 L483 829 L442 832 L400 834 L356 831 L314 822 L276 805 L245 780 L225 747 L216 709 L218 668 L230 627 L248 590 L267 558 L283 531 L291 509 L288 490 L275 470 L254 448 L229 422 L203 391 L183 357 L172 321 L173 285 L185 253 L208 226 L239 205 L274 189 L312 177 L349 168 L385 160 L420 152 L454 144 L489 137 L524 131 L560 130 L596 134 L630 144 L661 159 L688 179 L712 200 L734 221 L755 240 L779 255 L807 266 L841 275 L881 285 L924 297 L966 314 L1004 336 L1033 365 L1048 399 L1048 435 Z"/>
+<path class="c-minor" d="M1074 470 L1042 505 L1001 534 L957 558 L915 577 L879 593 L852 609 L832 627 L819 649 L808 675 L797 704 L783 733 L764 761 L738 786 L708 806 L674 822 L638 833 L599 842 L560 850 L519 857 L476 864 L430 871 L382 874 L334 871 L287 861 L245 841 L213 812 L192 774 L184 731 L189 685 L203 640 L223 600 L244 565 L259 537 L265 513 L259 492 L243 470 L218 445 L190 416 L163 382 L143 345 L133 306 L136 268 L152 234 L178 205 L212 182 L250 165 L290 151 L329 140 L367 129 L405 118 L442 107 L481 98 L520 93 L560 93 L599 99 L636 112 L670 132 L699 155 L724 179 L748 201 L772 220 L799 235 L831 246 L871 254 L916 264 L965 277 L1012 296 L1053 322 L1082 354 L1096 392 L1093 431 Z"/>
+<path class="c-major" d="M1114 470 L1078 507 L1033 539 L987 564 L944 585 L908 604 L880 623 L861 644 L847 669 L835 698 L822 728 L805 759 L782 788 L753 813 L720 833 L683 848 L643 860 L602 870 L560 880 L515 891 L468 901 L417 910 L364 915 L310 912 L259 901 L215 878 L180 844 L160 801 L153 752 L160 701 L177 652 L199 609 L220 572 L234 542 L238 517 L229 494 L208 470 L180 443 L150 410 L122 373 L103 332 L95 291 L101 251 L120 215 L149 185 L186 161 L226 141 L268 125 L309 111 L349 97 L389 83 L430 70 L472 59 L516 54 L560 56 L603 65 L643 82 L678 105 L709 131 L736 158 L761 182 L788 201 L819 215 L857 225 L902 233 L953 243 L1007 257 L1058 278 L1102 307 L1131 344 L1144 385 L1137 428 Z"/>
+<path class="c-minor" d="M1153 470 L1113 510 L1065 544 L1017 571 L973 594 L937 615 L910 637 L891 662 L877 689 L863 720 L847 753 L827 785 L800 814 L768 838 L731 858 L691 873 L649 886 L605 898 L560 911 L512 925 L460 939 L404 951 L345 957 L287 954 L231 941 L184 914 L149 875 L128 826 L124 772 L134 717 L153 664 L176 618 L196 579 L209 548 L209 521 L197 496 L173 470 L141 440 L109 404 L81 364 L63 321 L58 277 L67 235 L89 198 L121 166 L160 140 L202 118 L245 99 L288 81 L330 63 L373 46 L418 31 L464 20 L512 15 L560 19 L606 31 L649 52 L687 79 L719 109 L747 138 L775 163 L804 182 L839 195 L883 203 L934 211 L991 221 L1050 236 L1106 260 L1150 292 L1180 333 L1190 378 L1180 425 Z"/>
+<path class="c-minor" d="M1190 470 L1146 512 L1096 548 L1047 578 L1003 603 L968 627 L942 652 L923 680 L907 711 L891 744 L873 778 L848 810 L817 838 L781 862 L741 881 L699 897 L654 911 L608 926 L560 943 L508 960 L452 978 L390 993 L326 1000 L262 997 L203 981 L153 950 L118 906 L98 851 L96 792 L108 732 L129 676 L153 627 L173 586 L183 554 L180 525 L163 499 L135 470 L102 437 L68 398 L40 355 L24 309 L22 263 L34 219 L60 181 L94 147 L135 119 L179 94 L223 72 L267 50 L311 29 L357 8 L405 -9 L455 -21 L508 -24 L560 -18 L610 -1 L655 24 L694 55 L728 88 L758 119 L788 144 L821 162 L861 174 L910 181 L967 188 L1031 198 L1095 215 L1153 242 L1199 278 L1227 322 L1235 372 L1221 422 Z"/>
+      <circle cx="560" cy="470" r="5" fill="#F5E32A"/>
+      <line x1="560" y1="436" x2="560" y2="504" stroke="#F5E32A" stroke-width="1"/>
+      <line x1="526" y1="470" x2="594" y2="470" stroke="#F5E32A" stroke-width="1"/>
+      <text x="574" y="458">MAGNA-SIRGAS · Origen Nacional</text>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="kicker">Sistemas de Información Geográfica</p>
+    <h1 id="titulo">ArcGIS<br>Pro</h1>
+    <p class="lead">De los fundamentos al análisis avanzado y la automatización</p>
+    <p class="desc">Geodatabase, geoprocesamiento, teledetección, terreno, LiDAR, captura en campo y Python en un solo recorrido práctico con datos reales de Colombia.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://forms.gle/SDqaLNd56DMR9TC39" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-form"/></svg>Inscribirme ahora</a>
+      <a class="btn btn-ghost" href="https://wa.me/573168714348?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20de%20ArcGIS%20Pro%20de%2040%20horas." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+      <a class="btn btn-ghost" href="#ruta">Ver el contenido</a>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>40</b><span>horas académicas</span></div>
+      <div class="fact"><b>3</b><span>niveles de formación</span></div>
+      <div class="fact"><b>23</b><span>unidades prácticas</span></div>
+      <div class="fact"><b>1</b><span>proyecto integrador</span></div>
+    </div>
+    <dl class="logistics">
+      <div><dt>Fechas</dt><dd>17 de noviembre al 17 de diciembre · 14 sesiones de 3 h</dd></div>
+      <div><dt>Horario</dt><dd>Martes, jueves y viernes, 7:00 a 10:00 p. m.</dd></div>
+      <div><dt>Modalidad</dt><dd>Virtual, clases grabadas</dd></div>
+      <div><dt>Inversión</dt><dd>$260.000 COP · USD 90</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= PLAN DE ESTUDIO ======================= -->
+<section class="block" id="plan" aria-labelledby="plan-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01 / Objetivo</span>
+      <h2 id="plan-t">Resolver problemas territoriales con ArcGIS Pro</h2>
+    </div>
+    <div class="indent">
+      <p class="objective"><small>Objetivo general</small>Integrar gestión de datos, análisis vectorial y ráster, cartografía profesional y automatización para responder preguntas reales sobre el territorio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0" aria-labelledby="capaz-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 / Resultados</span>
+      <h2 id="capaz-t">Al terminar el curso serás capaz de</h2>
+    </div>
+    <ol class="outcomes indent">
+      <li>Configurar proyectos y datos con el sistema de referencia correcto (MAGNA-SIRGAS, Origen Nacional).</li>
+      <li>Crear y estructurar datos en geodatabase con dominios, subtipos y topología.</li>
+      <li>Resolver preguntas espaciales con geoprocesamiento y análisis vectorial.</li>
+      <li>Procesar imágenes satelitales y DEM: índices, clasificación y variables del terreno.</li>
+      <li>Diseñar mapas temáticos y series de mapas con calidad de publicación.</li>
+      <li>Capturar datos en campo y publicarlos con ArcGIS Online, Field Maps y Survey123.</li>
+      <li>Automatizar flujos de trabajo con ModelBuilder y Python (ArcPy).</li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0" aria-labelledby="metodo-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03 / Metodología</span>
+      <h2 id="metodo-t">Poca teoría, mucho taller</h2>
+    </div>
+    <div class="split indent">
+      <div class="panel">
+        <h3>Cómo se trabaja</h3>
+        <dl class="method">
+          <div><dt>Teoría breve + taller</dt><dd>Entre el 20 y el 30 % son conceptos; el resto, práctica guiada en ArcGIS Pro.</dd></div>
+          <div><dt>Datos reales de Colombia</dt><dd>IGAC, SGC, IDEAM, Copernicus y USGS en cada ejercicio.</dd></div>
+          <div><dt>Un caso que crece</dt><dd>El mismo proyecto avanza unidad a unidad hasta el entregable final.</dd></div>
+          <div><dt>Acompañamiento</dt><dd>Clases grabadas, material de apoyo y asesoría del docente.</dd></div>
+        </dl>
+      </div>
+      <div class="panel dark">
+        <h3>¿A quién va dirigido?</h3>
+        <p>Geólogos, geógrafos, cartógrafos, ingenieros ambientales, forestales, civiles y catastrales, y profesionales que trabajan con información territorial.</p>
+        <h4>Requisitos</h4>
+        <ul class="checks">
+          <li>No necesitas experiencia previa en SIG</li>
+          <li>ArcGIS Pro 3.x (Standard o Advanced)</li>
+          <li>Spatial, 3D e Image Analyst para el nivel avanzado</li>
+          <li>Cuenta de ArcGIS Online para campo y web</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RUTA ======================= -->
+<section class="block route" id="ruta" aria-labelledby="ruta-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04 / Ruta de aprendizaje</span>
+      <h2 id="ruta-t">Tres niveles, un mismo hilo conductor</h2>
+      <p>Cada barra es proporcional a las horas del nivel. Toca un nivel para ir a sus unidades.</p>
+    </div>
+    <div class="bar" role="list">
+      <a role="listitem" class="l1" href="#basico">Básico <span>15 h</span></a>
+      <a role="listitem" class="l2" href="#intermedio">Intermedio <span>12 h</span></a>
+      <a role="listitem" class="l3" href="#avanzado">Avanzado <span>13 h</span></a>
+    </div>
+    <div class="bar-legend" aria-hidden="true">
+      <div>Unidades 1–9 · el dato y el mapa</div>
+      <div>Unidades 10–15 · gestión y análisis</div>
+      <div>Unidades 16–23 · ráster, campo y código</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BÁSICO ======================= -->
+<section class="level lv1" id="basico" aria-labelledby="basico-t">
+  <div class="wrap">
+    <div class="level-head">
+      <h2 id="basico-t"><small>El dato y el mapa</small>Nivel básico</h2>
+      <span class="meta">9 unidades · 15 h</span>
+    </div>
+    <div class="units">
+      <article class="unit"><div class="unit-top"><span class="unit-n">01</span><span class="unit-h">2 h</span></div><h3>Fundamentos de SIG, geodesia y cartografía</h3><ul><li>Modelos vector y ráster</li><li>Datum, elipsoide y MAGNA-SIRGAS</li><li>UTM, Origen Nacional y escala</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">02</span><span class="unit-h">2 h</span></div><h3>Entorno de ArcGIS Pro</h3><ul><li>Proyecto .aprx, licencias y extensiones</li><li>Catálogo, contenido, mapas y escenas</li><li>Navegación 2D y 3D</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">03</span><span class="unit-h">1,5 h</span></div><h3>Entrada y manejo de datos</h3><ul><li>Shapefile, feature class, ráster</li><li>Servicios WMS/WFS y mapas base</li><li>Consultas y selección interactiva</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">04</span><span class="unit-h">1,5 h</span></div><h3>Sistemas de referencia y georreferenciación</h3><ul><li>Define Projection y Project</li><li>Transformaciones de datum</li><li>Georreferenciar planos e imágenes</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">05</span><span class="unit-h">3 h</span></div><h3>Creación y edición de vectores</h3><ul><li>Digitalización con plantillas y snapping</li><li>Puntos desde CSV, Excel y GPS</li><li>Dividir, combinar, remodelar</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">06</span><span class="unit-h">1,5 h</span></div><h3>Manejo de tablas</h3><ul><li>Calculate Field con Python y Arcade</li><li>Selección por atributos (SQL)</li><li>Joins, relates y estadísticas</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">07</span><span class="unit-h">1,5 h</span></div><h3>Simbología y etiquetado</h3><ul><li>Categorías, graduados y Arcade</li><li>Archivos de capa y estilos</li><li>Clases de etiquetas y reglas</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">08</span><span class="unit-h">1 h</span></div><h3>Interoperabilidad: CAD, KML y Google Earth</h3><ul><li>DWG/DXF a geodatabase</li><li>Export To CAD</li><li>Layer To KML y KML To Layer</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">09</span><span class="unit-h">1 h</span></div><h3>Elaboración de mapas</h3><ul><li>Diseño de página completo</li><li>Grillas de coordenadas</li><li>Exportación y plantillas .pagx</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= INTERMEDIO ======================= -->
+<section class="level lv2" id="intermedio" aria-labelledby="intermedio-t">
+  <div class="wrap">
+    <div class="level-head">
+      <h2 id="intermedio-t"><small>Del dato suelto al modelo de datos</small>Nivel intermedio</h2>
+      <span class="meta">6 unidades · 12 h</span>
+    </div>
+    <div class="units">
+      <article class="unit"><div class="unit-top"><span class="unit-n">10</span><span class="unit-h">2 h</span></div><h3>Geodatabase</h3><ul><li>File geodatabase y feature datasets</li><li>Dominios codificados y de rango; subtipos</li><li>Reglas de atributos con Arcade</li><li>Clases de relación y adjuntos</li><li>Migración desde shapefile y GeoPackage</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">11</span><span class="unit-h">2 h</span></div><h3>Topología</h3><ul><li>Rango de cluster y reglas por geometría</li><li>Validación e inspector de errores</li><li>Corrección y excepciones</li><li>Topología de mapa para bordes compartidos</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">12</span><span class="unit-h">3 h</span></div><h3>Geoprocesamiento</h3><ul><li>Buffer, Pairwise y Multiple Ring Buffer</li><li>Clip, Dissolve, Merge y Append</li><li>Intersect, Union, Erase, Symmetrical Difference</li><li>Spatial Join y Summarize Within</li><li>Entornos y ejecución por lotes</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">13</span><span class="unit-h">2,5 h</span></div><h3>Geometría y análisis vectorial</h3><ul><li>Check y Repair Geometry</li><li>Thiessen, TIN, Simplify y Densify</li><li>Near y matriz de distancias</li><li>Mean Center, vecino más próximo y Hot Spot</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">14</span><span class="unit-h">1,5 h</span></div><h3>Gestión de datos y muestreo</h3><ul><li>Selección por localización</li><li>Split By Attributes e índices espaciales</li><li>Random Points, Fishnet y teselaciones</li><li>Muestreo aleatorio estratificado</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">15</span><span class="unit-h">1 h</span></div><h3>ModelBuilder</h3><ul><li>Modelos con parámetros y variables</li><li>Iteradores y sustitución en línea</li><li>Publicar el modelo como herramienta</li></ul></article>
+    </div>
+    <dl class="pillars">
+      <div><dt>Integridad</dt><dd>Dominios, subtipos y topología evitan errores antes de que lleguen al análisis.</dd></div>
+      <div><dt>Análisis</dt><dd>Geoprocesos y estadística espacial para responder preguntas reales del territorio.</dd></div>
+      <div><dt>Flujos</dt><dd>ModelBuilder convierte procesos repetitivos en herramientas reutilizables.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= AVANZADO ======================= -->
+<section class="level lv3" id="avanzado" aria-labelledby="avanzado-t">
+  <div class="wrap">
+    <div class="level-head">
+      <h2 id="avanzado-t"><small>Imágenes, terreno, campo y código</small>Nivel avanzado</h2>
+      <span class="meta">8 unidades · 13 h</span>
+    </div>
+    <h3 class="part">Parte I · Información ráster <span>8,5 h</span></h3>
+    <div class="units">
+      <article class="unit"><div class="unit-top"><span class="unit-n">16</span><span class="unit-h">2,5 h</span></div><h3>Teledetección y procesamiento de imágenes</h3><ul><li>Landsat 8/9, Sentinel-2 y Living Atlas</li><li>Combinaciones de bandas y funciones ráster</li><li>NDVI, NDWI, NBR, mosaicos y pansharpening</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">17</span><span class="unit-h">1,5 h</span></div><h3>Clasificación de imágenes</h3><ul><li>ISO Cluster, Random Trees y SVM</li><li>Matriz de confusión y Kappa</li><li>Deep learning con modelos preentrenados</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">18</span><span class="unit-h">2 h</span></div><h3>Análisis del terreno e hidrología</h3><ul><li>Pendiente, orientación, sombras, curvas</li><li>Cuencas, red de drenaje y Strahler</li><li>Visibilidad y escenas 3D</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">19</span><span class="unit-h">1,5 h</span></div><h3>Interpolación, álgebra ráster y multicriterio</h3><ul><li>IDW, Spline, Kriging, Topo To Raster</li><li>Reclasificación y Raster Calculator</li><li>Weighted Overlay y Suitability Modeler</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">20</span><span class="unit-h">1 h</span></div><h3>LiDAR</h3><ul><li>LAS dataset y estadísticas</li><li>Clasificación de suelo y vegetación</li><li>DTM, DSM y altura de dosel</li></ul></article>
+      <aside class="unit note"><h3>Extensiones que usaremos</h3><p><strong>Spatial Analyst · 3D Analyst · Image Analyst</strong></p><p style="margin-top:10px">Opcional: conexión con Google Earth Engine desde ArcGIS Pro.</p></aside>
+    </div>
+    <h3 class="part">Parte II · Productos, campo y automatización <span>4,5 h</span></h3>
+    <div class="units">
+      <article class="unit"><div class="unit-top"><span class="unit-n">21</span><span class="unit-h">1,5 h</span></div><h3>Cartografía avanzada y series de mapas</h3><ul><li>Plantillas y texto dinámico</li><li>Etiquetado y simbología con Arcade</li><li>Map Series y exportación por lotes</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">22</span><span class="unit-h">1,5 h</span></div><h3>Campo y web</h3><ul><li>Publicación en ArcGIS Online</li><li>Formularios en Field Maps y Survey123</li><li>Dashboards y StoryMaps</li></ul></article>
+      <article class="unit"><div class="unit-top"><span class="unit-n">23</span><span class="unit-h">1,5 h</span></div><h3>Python en ArcGIS Pro (ArcPy)</h3><ul><li>Notebooks, cursores y listados</li><li>Geoprocesos desde código</li><li>Herramientas de script propias</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROYECTO ======================= -->
+<section class="block project" id="proyecto" aria-labelledby="proyecto-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05 / Proyecto final</span>
+      <h2 id="proyecto-t">Un proyecto que puedes mostrar</h2>
+      <p>Un análisis completo sobre tu propia área de estudio: una cuenca, un municipio o un proyecto real. Al cierre entregas:</p>
+    </div>
+    <ul class="deliverables">
+      <li>Geodatabase con dominios y topología validada</li>
+      <li>Un análisis vectorial y uno ráster</li>
+      <li>Mapa o serie de mapas en PDF</li>
+      <li>Modelo o script que automatice el flujo</li>
+    </ul>
+
+    <div class="tools-eval">
+      <div>
+        <h3>Herramientas y tecnologías</h3>
+        <ul class="chips">
+          <li>ArcGIS Pro</li><li>ArcGIS Online</li><li>Living Atlas</li><li>Spatial Analyst</li><li>Image Analyst</li><li>3D Analyst</li><li>Field Maps</li><li>Survey123</li><li>ModelBuilder</li><li>ArcPy · Notebooks</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Evaluación</h3>
+        <ul class="eval">
+          <li><div class="row"><span>Talleres por nivel</span><strong>50 %</strong></div><div class="track"><i style="width:50%"></i></div></li>
+          <li><div class="row"><span>Proyecto final</span><strong>40 %</strong></div><div class="track"><i style="width:40%"></i></div></li>
+          <li><div class="row"><span>Participación</span><strong>10 %</strong></div><div class="track"><i style="width:10%"></i></div></li>
+        </ul>
+        <!-- EDITAR: reemplaza el texto entre corchetes por la entidad certificadora y las horas acreditadas -->
+        <p class="cert">Certificación: <strong>[ENTIDAD CERTIFICADORA Y HORAS ACREDITADAS]</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= DOCENTE ======================= -->
+<section class="block" id="docente" aria-labelledby="docente-t">
+  <div class="wrap teacher">
+    <span class="sec-num">06 / Docente</span>
+    <div>
+      <h2 id="docente-t">Carlos Tavera</h2>
+      <p class="role">Geólogo · MSc. en Geomática y Geoinformación · Especialista en Sistemas de Información Geográfica</p>
+      <p class="bio">Experto en programación GIS e inteligencia artificial, con amplia experiencia en cartografía base y temática, procesamiento avanzado de imágenes satelitales, desarrollo de soluciones GIS con Python, bases de datos espaciales y geoportales.</p>
+      <ul class="areas" aria-label="Experiencia en proyectos">
+        <li>Planes de Ordenamiento Territorial (POT)</li><li>Estudios de Impacto Ambiental (EIA)</li><li>POMCA</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= INVERSIÓN ======================= -->
+<section class="enroll" id="inversion" aria-labelledby="inv-t">
+  <div class="wrap">
+    <div class="enroll-card">
+      <div class="price">
+        <h2 id="inv-t">Inversión</h2>
+        <p class="amount">$260.000<span>COP</span></p>
+        <p class="alt">o <strong>USD 90</strong> para participantes internacionales</p>
+        <div class="student"><span>Estudiantes</span><strong>$220.000<small>COP</small></strong></div>
+      </div>
+      <div class="contact">
+        <div>
+          <h2>Inscríbete ahora</h2>
+          <p>La cohorte inicia el martes 17 de noviembre. Llena el formulario para reservar tu cupo; si tienes dudas, escríbenos por WhatsApp o correo.</p>
+        </div>
+        <div class="ways">
+          <a class="way way-form" href="https://forms.gle/SDqaLNd56DMR9TC39" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-form"/></svg><span><small>Formulario de inscripción</small><b>Inscribirme ahora</b></span></a>
+          <a class="way" href="https://wa.me/573168714348?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20de%20ArcGIS%20Pro%20de%2040%20horas." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp</small><b>+57 316 871 4348</b></span></a>
+          <a class="way" href="mailto:ingenioconsultoria.cyt@gmail.com?subject=Inscripci%C3%B3n%20curso%20ArcGIS%20Pro"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><small>Correo</small><b>ingenioconsultoria.cyt@gmail.com</b></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Ingenio Consultoría"><svg><use href="#logo"/></svg></a>
+    <span>Curso de especialización en ArcGIS Pro · Ingenio Consultoría · Docente: Carlos Tavera</span>
+  </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp: abre el chat con +57 316 871 4348 y un mensaje prellenado -->
+<a class="wa-float" href="https://wa.me/573168714348?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20curso%20de%20ArcGIS%20Pro%20de%2040%20horas." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <span class="wa-label">¿Dudas? Escríbenos</span>
+  <span class="wa-bubble"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.06 3 3.4 8.66 3.4 15.63c0 2.23.58 4.4 1.69 6.32L3.3 28.5l6.73-1.76a12.6 12.6 0 0 0 6.01 1.53h.01c6.97 0 12.64-5.66 12.64-12.63C28.69 8.66 23.02 3 16.04 3Zm0 23.14h-.01c-1.89 0-3.74-.51-5.35-1.46l-.38-.23-4 1.04 1.07-3.9-.25-.4a10.47 10.47 0 0 1-1.6-5.56c0-5.8 4.72-10.51 10.53-10.51 2.81 0 5.45 1.1 7.44 3.08a10.45 10.45 0 0 1 3.08 7.44c0 5.8-4.72 10.5-10.53 10.5Zm5.77-7.87c-.32-.16-1.87-.92-2.16-1.03-.29-.1-.5-.16-.71.16-.21.32-.81 1.03-1 1.24-.18.21-.37.24-.68.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.32-.02-.49.14-.65.14-.14.32-.37.47-.55.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.08-1.1 2.62 0 1.55 1.13 3.05 1.29 3.26.16.21 2.22 3.39 5.38 4.75.75.32 1.34.52 1.8.66.75.24 1.44.21 1.98.13.6-.09 1.87-.76 2.13-1.5.26-.74.26-1.37.18-1.5-.08-.13-.29-.21-.6-.37Z"/></svg></span>
+</a>
+</body>
+</html>
